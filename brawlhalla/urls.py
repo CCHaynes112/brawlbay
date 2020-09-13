@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import BrawlhallaPlayerView, BrawlhallaPlayersView
+from .views import BrawlhallaPlayerView, BrawlhallaPlayersView, TopRankedView
 
 urlpatterns = [
     path(
@@ -12,4 +12,5 @@ urlpatterns = [
         BrawlhallaPlayerView.as_view(),
         name="brawlhalla_player_view",
     ),
+    path("topRanked", TopRankedView.as_view(), name="brawlhalla_top_ranked"),
 ]

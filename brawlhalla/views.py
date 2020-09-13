@@ -15,10 +15,14 @@ class BrawlhallaPlayerView(View):
             if timezone.now() - player.updated_at < datetime.timedelta(minutes=30):
                 return JsonResponse({"data": BrawlhallaPlayerSchema().dump(player)})
             else:
-                updated_player = BrawlhallaClient().update_player_from_api(brawlhalla_id)
-                return JsonResponse({"data": BrawlhallaPlayerSchema().dump(updated_player)})
+                updated_player = BrawlhallaClient().update_all_player_data(
+                    brawlhalla_id
+                )
+                return JsonResponse(
+                    {"data": BrawlhallaPlayerSchema().dump(updated_player)}
+                )
         except ObjectDoesNotExist:
-            created_player = BrawlhallaClient().create_player_from_api(brawlhalla_id)
+            created_player = BrawlhallaClient().update_all_player_data(brawlhalla_id)
             return JsonResponse({"data": BrawlhallaPlayerSchema().dump(created_player)})
 
 
@@ -26,3 +30,9 @@ class BrawlhallaPlayersView(View):
     def get(self, request):
         players = BrawlhallaPlayer.objects.all()[:5]
         return JsonResponse({"data": BrawlhallaPlayerSchema().dump(players, many=True)})
+
+
+class TopRankedView(View):
+    def get(self, request):
+
+        return

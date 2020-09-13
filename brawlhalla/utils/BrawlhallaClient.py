@@ -7,6 +7,8 @@ from ..models import (
     BrawlhallaLegend,
     BrawlhallaPlayerRanked,
     BrawlhallaPlayerRankedLegend,
+    BrawlhallaClan,
+    BrawlhallaClanPlayer,
 )
 
 
@@ -49,6 +51,9 @@ class BrawlhallaClient:
             },
             "legends": [],
         }
+
+        if "clan" in player_json.keys():
+            player_data["clan_id"] = player_json.pop("clan")["clan_id"]
 
         for legend in legend_json:
             player_data["legends"].append(
@@ -93,6 +98,9 @@ class BrawlhallaClient:
             )
         ).json()
 
+        if ranked_json == {}:
+            return None
+
         legend_json = ranked_json.pop("legends")
         ranked_json.pop("2v2")  # ranked_2v2_json = ranked_json.pop("2v2")
         ranked_data = {
@@ -131,9 +139,34 @@ class BrawlhallaClient:
 
     def get_clan_data(self, clan_id):
         """ Get general clan information, including each clan member """
-        return requests.get(
+        clan_json = requests.get(
             "https://api.brawlhalla.com/clan/{0}?api_key={1}".format(clan_id, brawl_key)
         ).json()
+
+        clan_members = clan_json.pop("clan")
+        clan_data = {
+            "general_data": {
+                "clan_id": clan_json["clan_id"],
+                "clan_name": clan_json["clan_name"],
+                "clan_create_date": time.strftime(
+                    "%Y-%m-%d %H:%M:%S", time.localtime(clan_json["clan_create_date"])
+                ),
+                "clan_xp": clan_json["clan_xp"],
+            },
+            "members": [],
+        }
+        for member in clan_members:
+            clan_data["members"].append(
+                {
+                    "brawlhalla_id": member["brawlhalla_id"],
+                    "rank": member["rank"],
+                    "join_date": time.strftime(
+                        "%Y-%m-%d %H:%M:%S", time.localtime(member["join_date"])
+                    ),
+                    "xp": member["xp"],
+                }
+            )
+        return clan_data
 
     def get_all_legend_data(self):
         """ Get overview data about all legends """
@@ -189,24 +222,42 @@ class BrawlhallaClient:
                 defaults=legend,
             )
 
-        # Update ranked
-        ranked_data = self.get_ranked_player_data(id)
-        ranked, _ = BrawlhallaPlayerRanked.objects.update_or_create(
-            brawlhalla_player=player,
-            defaults=ranked_data["general_data"],
-        )
-
-        # Update each ranked legend
-        for legend in ranked_data["legends"]:
-            legend_id = legend.pop("legend_id")
-            BrawlhallaPlayerRankedLegend.objects.update_or_create(
-                ranked=ranked,
-                legend=BrawlhallaLegend.objects.get(legend_id=legend_id),
-                defaults=legend,
+        # Update clan
+        if "clan_id" in player_data:
+            clan_id = player_data["clan_id"]
+            clan_data = self.get_clan_data(clan_id)
+            clan, _ = BrawlhallaClan.objects.update_or_create(
+                clan_id=clan_id,
+                defaults=clan_data["general_data"],
             )
 
-        # Update Player Clan
-        pass
+            # Update clan player
+            for member in clan_data["members"]:
+                member_id = member.pop("brawlhalla_id")
+                if member_id == id:
+                    BrawlhallaClanPlayer.objects.update_or_create(
+                        clan=clan,
+                        player=player,
+                        defaults=member,
+                    )
+
+        # Update ranked
+        ranked_data = self.get_ranked_player_data(id)
+        if ranked_data is not None:
+            ranked, _ = BrawlhallaPlayerRanked.objects.update_or_create(
+                brawlhalla_player=player,
+                defaults=ranked_data["general_data"],
+            )
+
+            # Update each ranked legend
+            for legend in ranked_data["legends"]:
+                legend_id = legend.pop("legend_id")
+                BrawlhallaPlayerRankedLegend.objects.update_or_create(
+                    ranked=ranked,
+                    legend=BrawlhallaLegend.objects.get(legend_id=legend_id),
+                    defaults=legend,
+                )
+        return player
 
     def update_all_legends(self):
         for id in self.get_all_legend_data():

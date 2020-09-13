@@ -76,6 +76,9 @@ class BrawlhallaClan(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return "{0}".format(self.clan_name)
+
 
 class BrawlhallaClanPlayer(models.Model):
     clan = models.ForeignKey(
@@ -89,6 +92,9 @@ class BrawlhallaClanPlayer(models.Model):
     xp = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{0} - {1}".format(self.clan.clan_name, self.player)
 
 
 class BrawlhallaPlayerRankedLegend(models.Model):
