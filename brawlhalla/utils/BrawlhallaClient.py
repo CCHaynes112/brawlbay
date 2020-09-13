@@ -1,7 +1,13 @@
 from secret_keys import brawl_key
 import requests
 import time
-from ..models import BrawlhallaPlayer, BrawlhallaPlayerLegend, BrawlhallaLegend
+from ..models import (
+    BrawlhallaPlayer,
+    BrawlhallaPlayerLegend,
+    BrawlhallaLegend,
+    BrawlhallaPlayerRanked,
+    BrawlhallaPlayerRankedLegend,
+)
 
 
 class BrawlhallaClient:
@@ -43,26 +49,37 @@ class BrawlhallaClient:
             },
             "legends": [],
         }
+
         for legend in legend_json:
-            player_data.legends.append(
+            player_data["legends"].append(
                 {
-                    "legend": legend["legend_id"],
-                    "brawlhalla_player": player_json["brawlhalla_id"],
-                    "name": legend["name"],
+                    "legend_id": legend["legend_id"],
+                    # "brawlhalla_player_id": player_json["brawlhalla_id"],
+                    # "name": legend["legend_name_key"],
+                    "damage_dealt": legend["damagedealt"],
+                    "damage_taken": legend["damagetaken"],
+                    "kos": legend["kos"],
+                    "falls": legend["falls"],
+                    "suicides": legend["suicides"],
+                    "team_kos": legend["teamkos"],
+                    "match_time": legend["matchtime"],
+                    "games": legend["games"],
+                    "wins": legend["wins"],
+                    "damage_unarmed": legend["damageunarmed"],
+                    "damage_thrown": legend["damagethrownitem"],
+                    "damage_weapon_one": legend["damageweaponone"],
+                    "damage_weapon_two": legend["damageweapontwo"],
+                    "damage_gadgets": legend["damagegadgets"],
+                    "ko_unarmed": legend["kounarmed"],
+                    "ko_thrown": legend["kothrownitem"],
+                    "ko_weapon_one": legend["koweaponone"],
+                    "ko_weapon_two": legend["koweapontwo"],
+                    "ko_gadgets": legend["kogadgets"],
+                    "time_held_weapon_one": legend["timeheldweaponone"],
+                    "time_held_weapon_two": legend["timeheldweapontwo"],
                     "xp": legend["xp"],
                     "level": legend["level"],
                     "xp_percent": legend["xp_percentage"],
-                    "games": legend["games"],
-                    "wins": legend["wins"],
-                    "damage_bomb": legend["damagebomb"],
-                    "damage_mine": legend["damagemine"],
-                    "damage_spikeball": legend["damagespikeball"],
-                    "damage_sidekick": legend["damagesidekick"],
-                    "hit_snowball": legend["hitsnowball"],
-                    "ko_bomb": legend["kobomb"],
-                    "ko_spike": legend["kospikeball"],
-                    "ko_sidekick": legend["kosidekick"],
-                    "ko_snowball": legend["kosnowball"],
                 }
             )
 
@@ -70,11 +87,39 @@ class BrawlhallaClient:
 
     def get_ranked_player_data(self, id):
         """ Get ranked stats about a player, including ranked stats about each legend """
-        return requests.get(
+        ranked_json = requests.get(
             "https://api.brawlhalla.com/player/{0}/ranked?api_key={1}".format(
                 id, brawl_key
             )
         ).json()
+
+        legend_json = ranked_json.pop("legends")
+        ranked_json.pop("2v2")  # ranked_2v2_json = ranked_json.pop("2v2")
+        ranked_data = {
+            "general_data": {
+                "rating": ranked_json["rating"],
+                "peak_rating": ranked_json["peak_rating"],
+                "tier": ranked_json["tier"],
+                "wins": ranked_json["wins"],
+                "games": ranked_json["games"],
+                "region": ranked_json["region"],
+                "global_rank": ranked_json["global_rank"],
+                "region_rank": ranked_json["region_rank"],
+            },
+            "legends": [],
+        }
+        for legend in legend_json:
+            ranked_data["legends"].append(
+                {
+                    "legend_id": legend["legend_id"],
+                    "rating": legend["rating"],
+                    "peak_rating": legend["peak_rating"],
+                    "tier": legend["tier"],
+                    "wins": legend["wins"],
+                    "games": legend["games"],
+                }
+            )
+        return ranked_data
 
     def get_leaderboard_data(self, bracket, region, page_number):
         """ Get ranked leaderboard data """
@@ -131,18 +176,35 @@ class BrawlhallaClient:
         # Update player
         player_data = self.get_player_data(id)
         player, _ = BrawlhallaPlayer.objects.update_or_create(
-            brawlhalla_id=player_data.general_data["brawlhalla_id"],
+            brawlhalla_id=player_data["general_data"]["brawlhalla_id"],
             defaults=player_data["general_data"],
         )
+
         # Update each player legend
         for legend in player_data["legends"]:
+            legend_id = legend.pop("legend_id")
             BrawlhallaPlayerLegend.objects.update_or_create(
-                legend=legend["legend"],
-                brawlhalla_player=legend["brawlhalla_player"],
+                legend=BrawlhallaLegend.objects.get(legend_id=legend_id),
+                brawlhalla_player=player,
                 defaults=legend,
             )
+
         # Update ranked
+        ranked_data = self.get_ranked_player_data(id)
+        ranked, _ = BrawlhallaPlayerRanked.objects.update_or_create(
+            brawlhalla_player=player,
+            defaults=ranked_data["general_data"],
+        )
+
         # Update each ranked legend
+        for legend in ranked_data["legends"]:
+            legend_id = legend.pop("legend_id")
+            BrawlhallaPlayerRankedLegend.objects.update_or_create(
+                ranked=ranked,
+                legend=BrawlhallaLegend.objects.get(legend_id=legend_id),
+                defaults=legend,
+            )
+
         # Update Player Clan
         pass
 

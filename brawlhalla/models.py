@@ -21,6 +21,9 @@ class BrawlhallaPlayer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return "{0}".format(self.name)
+
 
 class BrawlhallaPlayerRanked(models.Model):
     brawlhalla_player = models.ForeignKey(
@@ -36,6 +39,9 @@ class BrawlhallaPlayerRanked(models.Model):
     region_rank = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{0} ranked 1v1".format(self.brawlhalla_player.name)
 
 
 class BrawlhallaLegend(models.Model):
@@ -100,6 +106,11 @@ class BrawlhallaPlayerRankedLegend(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return "{0} - {1}".format(
+            self.ranked.brawlhalla_player.name, self.legend.legend_name
+        )
+
 
 class BrawlhallaPlayerLegend(models.Model):
     brawlhalla_player = models.ForeignKey(
@@ -134,3 +145,6 @@ class BrawlhallaPlayerLegend(models.Model):
     xp_percent = models.DecimalField(max_digits=5, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{0} - {1}".format(self.brawlhalla_player.name, self.legend.legend_name)
