@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class BrawlhallaUser(models.Model):
+class BrawlhallaPlayer(models.Model):
     brawlhalla_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=64)
     xp = models.IntegerField()
@@ -23,8 +23,8 @@ class BrawlhallaUser(models.Model):
 
 
 class BrawlhallaPlayerRanked(models.Model):
-    brawlhalla_user = models.ForeignKey(
-        BrawlhallaUser, on_delete=models.CASCADE, related_name="ranked"
+    brawlhalla_player = models.ForeignKey(
+        BrawlhallaPlayer, on_delete=models.CASCADE, related_name="ranked"
     )
     rating = models.IntegerField()
     peak_rating = models.IntegerField()
@@ -58,6 +58,9 @@ class BrawlhallaLegend(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return "{0} - {1}".format(self.legend_id, self.legend_name)
+
 
 class BrawlhallaClan(models.Model):
     clan_id = models.IntegerField(unique=True)
@@ -68,12 +71,12 @@ class BrawlhallaClan(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class BrawlhallaClanUser(models.Model):
+class BrawlhallaClanPlayer(models.Model):
     clan = models.ForeignKey(
         BrawlhallaClan, on_delete=models.CASCADE, related_name="clan_members"
     )
-    user = models.OneToOneField(
-        BrawlhallaUser, on_delete=models.CASCADE, related_name="clan_profile"
+    player = models.OneToOneField(
+        BrawlhallaPlayer, on_delete=models.CASCADE, related_name="clan_profile"
     )
     rank = models.CharField(max_length=32)
     join_date = models.DateTimeField()
@@ -99,8 +102,8 @@ class BrawlhallaPlayerRankedLegend(models.Model):
 
 
 class BrawlhallaPlayerLegend(models.Model):
-    brawlhalla_user = models.ForeignKey(
-        BrawlhallaUser, on_delete=models.CASCADE, related_name="legends"
+    brawlhalla_player = models.ForeignKey(
+        BrawlhallaPlayer, on_delete=models.CASCADE, related_name="legends"
     )
     legend = models.ForeignKey(
         BrawlhallaLegend, on_delete=models.CASCADE, related_name="played_legends"

@@ -1,18 +1,18 @@
 from django.contrib import admin
 
 from .models import (
-    BrawlhallaUser,
+    BrawlhallaPlayer,
     BrawlhallaPlayerRankedLegend,
     BrawlhallaPlayerRanked,
     BrawlhallaPlayerLegend,
     BrawlhallaLegend,
-    BrawlhallaClanUser,
+    BrawlhallaClanPlayer,
     BrawlhallaClan,
 )
 
 
-@admin.register(BrawlhallaUser)
-class BrawlhallaUserAdmin(admin.ModelAdmin):
+@admin.register(BrawlhallaPlayer)
+class BrawlhallaPlayerAdmin(admin.ModelAdmin):
     pass
 
 
@@ -36,8 +36,8 @@ class BrawlhallaLegendAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(BrawlhallaClanUser)
-class BrawlhallaClanUserAdmin(admin.ModelAdmin):
+@admin.register(BrawlhallaClanPlayer)
+class BrawlhallaClanPlayerAdmin(admin.ModelAdmin):
     pass
 
 

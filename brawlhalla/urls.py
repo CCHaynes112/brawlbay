@@ -1,15 +1,15 @@
 from django.urls import path
-from .views import BrawlhallaUserView, BrawlhallaUsersView
+from .views import BrawlhallaPlayerView, BrawlhallaPlayersView
 
 urlpatterns = [
     path(
-        "users",
-        BrawlhallaUsersView.as_view(),
-        name="brawlhalla_users_view",
+        "players",
+        BrawlhallaPlayersView.as_view(),
+        name="brawlhalla_players_view",
     ),
     path(
-        "users/<int:brawlhalla_id>",
-        BrawlhallaUserView.as_view(),
-        name="brawlhalla_user_view",
+        "players/<int:brawlhalla_id>",
+        BrawlhallaPlayerView.as_view(),
+        name="brawlhalla_player_view",
     ),
 ]

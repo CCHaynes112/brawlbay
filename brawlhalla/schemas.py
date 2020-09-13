@@ -1,7 +1,7 @@
 from marshmallow import Schema, fields
 
 
-class BrawlhallaUserSchema(Schema):
+class BrawlhallaPlayerSchema(Schema):
     brawlhalla_id = fields.Integer()
     name = fields.String()
     xp = fields.Integer()
