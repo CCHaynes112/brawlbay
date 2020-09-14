@@ -20,3 +20,7 @@ class BrawlhallaPlayerSchema(Schema):
     ko_snowball = fields.Integer()
     created_at = fields.DateTime()
     updated_at = fields.DateTime()
+    best_legend = fields.Method("get_best_legend")
+
+    def get_best_legend(self, player):
+        return player.legends.all().order_by("-wins").first().legend.legend_id

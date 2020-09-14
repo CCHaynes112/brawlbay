@@ -131,11 +131,16 @@ class BrawlhallaClient:
 
     def get_leaderboard_data(self, bracket, region, page_number):
         """ Get ranked leaderboard data """
-        return requests.get(
+        leaderboard_data = requests.get(
             "https://api.brawlhalla.com/{0}/{1}/{2}?api_key={3}".format(
                 bracket, region, page_number, brawl_key
             )
         ).json()
+
+        ids = []
+        for player in leaderboard_data:
+            ids.append(player["brawlhalla_id"])
+        return ids
 
     def get_clan_data(self, clan_id):
         """ Get general clan information, including each clan member """
@@ -258,6 +263,11 @@ class BrawlhallaClient:
                     defaults=legend,
                 )
         return player
+
+    def update_leaderboard_players(self, bracket, region, page_number):
+        ids = self.get_leaderboard_data(bracket, region, page_number)
+        for id in ids:
+            self.update_all_player_data(id)
 
     def update_all_legends(self):
         for id in self.get_all_legend_data():

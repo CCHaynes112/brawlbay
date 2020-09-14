@@ -34,5 +34,8 @@ class BrawlhallaPlayersView(View):
 
 class TopRankedView(View):
     def get(self, request):
-
-        return
+        player_count = int(request.GET.get("playerCount"))
+        players = BrawlhallaPlayer.objects.filter(ranked__isnull=False).order_by(
+            "-ranked__rating"
+        )[:player_count]
+        return JsonResponse({"data": BrawlhallaPlayerSchema().dump(players, many=True)})
