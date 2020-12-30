@@ -2,6 +2,7 @@ from marshmallow import Schema, fields
 
 
 class BrawlhallaPlayerSchema(Schema):
+    # Need to add nested schemas here for ranked data? Or should that be a seperate API call?
     brawlhalla_id = fields.Integer()
     name = fields.String()
     xp = fields.Integer()
@@ -23,4 +24,4 @@ class BrawlhallaPlayerSchema(Schema):
     best_legend = fields.Method("get_best_legend")
 
     def get_best_legend(self, player):
-        return player.legends.all().order_by("-wins").first().legend.legend_id
+        return player.legends.all().order_by("-wins").first().legend.legend_id if player.legends.exists() else None
