@@ -12,24 +12,14 @@ from ..models import (
 )
 
 
-class BrawlhallaClient:
-    def get_steam_player(self, steam_id):
-        """ Get id and name of player from steam id """
-        return requests.get(
-            "https://api.brawlhalla.com/search?steamid={0}&api_key={1}".format(
-                steam_id, brawl_key
-            )
-        ).json()
+class BrawlhallaDataConverter:
+    def __init__(self):
+        self.client = BrawlhallaClient()
 
     def get_player_data(self, id):
-        """ Get general stats about a player, including stats about each legend """
-        player_json = requests.get(
-            "https://api.brawlhalla.com/player/{0}/stats?api_key={1}".format(
-                id, brawl_key
-            )
-        ).json()
-
+        player_json = self.client.get_player_data(id)
         legend_json = player_json.pop("legends")
+
         player_data = {
             "general_data": {
                 "brawlhalla_id": player_json["brawlhalla_id"],
@@ -91,12 +81,7 @@ class BrawlhallaClient:
         return player_data
 
     def get_ranked_player_data(self, id):
-        """ Get ranked stats about a player, including ranked stats about each legend """
-        ranked_json = requests.get(
-            "https://api.brawlhalla.com/player/{0}/ranked?api_key={1}".format(
-                id, brawl_key
-            )
-        ).json()
+        ranked_json = self.client.get_ranked_player_data(id)
 
         if ranked_json == {}:
             return None
@@ -129,24 +114,8 @@ class BrawlhallaClient:
             )
         return ranked_data
 
-    def get_leaderboard_data(self, bracket, region, page_number):
-        """ Get ranked leaderboard data """
-        leaderboard_data = requests.get(
-            "https://api.brawlhalla.com/{0}/{1}/{2}?api_key={3}".format(
-                bracket, region, page_number, brawl_key
-            )
-        ).json()
-
-        ids = []
-        for player in leaderboard_data:
-            ids.append(player["brawlhalla_id"])
-        return ids
-
     def get_clan_data(self, clan_id):
-        """ Get general clan information, including each clan member """
-        clan_json = requests.get(
-            "https://api.brawlhalla.com/clan/{0}?api_key={1}".format(clan_id, brawl_key)
-        ).json()
+        clan_json = self.client.get_clan_data(clan_id)
 
         clan_members = clan_json.pop("clan")
         clan_data = {
@@ -172,43 +141,6 @@ class BrawlhallaClient:
                 }
             )
         return clan_data
-
-    def get_all_legend_data(self):
-        """ Get overview data about all legends """
-        legends_json = requests.get(
-            "https://api.brawlhalla.com/legend/all?api_key={0}".format(brawl_key)
-        ).json()
-
-        ids = []
-        for legend in legends_json:
-            ids.append(legend["legend_id"])
-        return ids
-
-    def get_legend_data(self, legend_id):
-        """ Get detailed data about a legend """
-        legend_response = requests.get(
-            "https://api.brawlhalla.com/legend/{0}?api_key={1}".format(
-                legend_id, brawl_key
-            )
-        ).json()
-        return {
-            "legend_id": legend_response["legend_id"],
-            "legend_name": legend_response["legend_name_key"],
-            "bio_name": legend_response["bio_name"],
-            "bio_aka": legend_response["bio_aka"],
-            "bio_quote": legend_response["bio_quote"],
-            "bio_quote_about_attrib": legend_response["bio_quote_about_attrib"],
-            "bio_quote_from": legend_response["bio_quote_from"],
-            "bio_quote_from_attrib": legend_response["bio_quote_from_attrib"],
-            "bio_text": legend_response["bio_text"],
-            "bot_name": legend_response["bot_name"],
-            "weapon_one": legend_response["weapon_one"],
-            "weapon_two": legend_response["weapon_two"],
-            "strength": legend_response["strength"],
-            "dexterity": legend_response["dexterity"],
-            "defense": legend_response["defense"],
-            "speed": legend_response["speed"],
-        }
 
     def update_all_player_data(self, id):
         # Update player
@@ -264,19 +196,56 @@ class BrawlhallaClient:
                 )
         return player
 
-    def update_leaderboard_players(self, bracket, region, page_number):
-        ids = self.get_leaderboard_data(bracket, region, page_number)
-        for id in ids:
-            self.update_all_player_data(id)
 
-    def update_all_legends(self):
-        for id in self.get_all_legend_data():
-            self.update_legend_detail(id)
-            time.sleep(5)
+class BrawlhallaClient:
+    BRAWL_API_BASE = "https://api.brawlhalla.com/"
 
-    def update_legend_detail(self, id):
-        legend_data = self.get_legend_data(id)
-        BrawlhallaLegend.objects.update_or_create(
-            legend_id=legend_data["legend_id"], defaults=legend_data
-        )
-        print("{0} updated/created".format(id))
+    def get_steam_player(self, steam_id):
+        """ Get id and name of player from steam id """
+        return requests.get(
+            "{0}search?steamid={1}&api_key={2}".format(
+                self.BRAWL_API_BASE, steam_id, brawl_key
+            )
+        ).json()
+
+    def get_player_data(self, id):
+        """ Get general stats about a player, including stats about each legend """
+        return requests.get(
+            "{0}player/{1}/stats?api_key={2}".format(self.BRAWL_API_BASE, id, brawl_key)
+        ).json()
+
+    def get_ranked_player_data(self, id):
+        """ Get ranked stats about a player, including ranked stats about each legend """
+        return requests.get(
+            "https://api.brawlhalla.com/player/{0}/ranked?api_key={1}".format(
+                id, brawl_key
+            )
+        ).json()
+
+    def get_leaderboard_data(self, bracket, region, page_number, player_name=""):
+        """ Get ranked leaderboard data """
+        return requests.get(
+            "{0}/rankings/{1}/{2}/{3}?api_key={4}&name={5}".format(
+                self.BRAWL_API_BASE, bracket, region, page_number, brawl_key, player_name
+            )
+        ).json()
+
+    def get_clan_data(self, clan_id):
+        """ Get general clan information, including each clan member """
+        return requests.get(
+            "{0}/clan/{1}?api_key={2}".format(self.BRAWL_API_BASE, clan_id, brawl_key)
+        ).json()
+
+    def get_all_legend_data(self):
+        """ Get overview data about all legends """
+        return requests.get(
+            "{0}/legend/all?api_key={1}".format(self.BRAWL_API_BASE, brawl_key)
+        ).json()
+
+    def get_legend_data(self, legend_id):
+        """ Get detailed data about a legend """
+        return requests.get(
+            "{0}/legend/{1}?api_key={2}".format(
+                self.BRAWL_API_BASE, legend_id, brawl_key
+            )
+        ).json()
