@@ -8,6 +8,7 @@ from .models import (
     BrawlhallaLegend,
     BrawlhallaClanPlayer,
     BrawlhallaClan,
+    BrawlhallaPlayerRankedTeam,
 )
 
 
@@ -43,4 +44,9 @@ class BrawlhallaClanPlayerAdmin(admin.ModelAdmin):
 
 @admin.register(BrawlhallaClan)
 class BrawlhallaClanAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(BrawlhallaPlayerRankedTeam)
+class BrawlhallaPlayerRankedTeam(admin.ModelAdmin):
     pass

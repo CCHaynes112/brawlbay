@@ -44,6 +44,29 @@ class BrawlhallaPlayerRanked(models.Model):
         return "{0} ranked 1v1".format(self.brawlhalla_player.name)
 
 
+class BrawlhallaPlayerRankedTeam(models.Model):
+    brawlhalla_player_1 = models.IntegerField()
+    brawlhalla_player_2 = models.IntegerField()
+    rating = models.IntegerField()
+    peak_rating = models.IntegerField()
+    tier = models.CharField(max_length=32)
+    wins = models.IntegerField()
+    games = models.IntegerField()
+    team_name = models.CharField(max_length=128)
+    region = models.CharField(max_length=64)
+    global_rank = models.IntegerField()
+
+    def __str__(self):
+        return self.team_name
+
+    def player_in_team(self, player_id):
+        if (
+            player_id == self.brawlhalla_player_1
+            or player_id == self.brawlhalla_player_2
+        ):
+            return True
+
+
 class BrawlhallaLegend(models.Model):
     legend_id = models.IntegerField(unique=True)
     legend_name = models.CharField(max_length=32)

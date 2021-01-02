@@ -9,6 +9,7 @@ from ..models import (
     BrawlhallaPlayerRankedLegend,
     BrawlhallaClan,
     BrawlhallaClanPlayer,
+    BrawlhallaPlayerRankedTeam,
 )
 
 
@@ -87,7 +88,7 @@ class BrawlhallaDataConverter:
             return None
 
         legend_json = ranked_json.pop("legends")
-        ranked_json.pop("2v2")  # ranked_2v2_json = ranked_json.pop("2v2")
+        ranked_teams = ranked_json.pop("2v2")
         ranked_data = {
             "general_data": {
                 "rating": ranked_json["rating"],
@@ -100,6 +101,7 @@ class BrawlhallaDataConverter:
                 "region_rank": ranked_json["region_rank"],
             },
             "legends": [],
+            "ranked_teams": [],
         }
         for legend in legend_json:
             ranked_data["legends"].append(
@@ -110,6 +112,21 @@ class BrawlhallaDataConverter:
                     "tier": legend["tier"],
                     "wins": legend["wins"],
                     "games": legend["games"],
+                }
+            )
+        for team_data in ranked_teams:
+            ranked_data["ranked_teams"].append(
+                {
+                    "brawlhalla_player_1": team_data["brawlhalla_id_one"],
+                    "brawlhalla_player_2": team_data["brawlhalla_id_two"],
+                    "rating": team_data["rating"],
+                    "peak_rating": team_data["peak_rating"],
+                    "tier": team_data["tier"],
+                    "wins": team_data["wins"],
+                    "games": team_data["games"],
+                    "team_name": team_data["teamname"],
+                    "region": team_data["region"],
+                    "global_rank": team_data["global_rank"],
                 }
             )
         return ranked_data
@@ -194,6 +211,13 @@ class BrawlhallaDataConverter:
                     legend=BrawlhallaLegend.objects.get(legend_id=legend_id),
                     defaults=legend,
                 )
+
+            for team in ranked_data["ranked_teams"]:
+                BrawlhallaPlayerRankedTeam.objects.update_or_create(
+                    brawlhalla_player_1=team["brawlhalla_player_1"],
+                    brawlhalla_player_2=team["brawlhalla_player_1"],
+                    defaults=team,
+                )
         return player
 
 
@@ -226,7 +250,12 @@ class BrawlhallaClient:
         """ Get ranked leaderboard data """
         return requests.get(
             "{0}/rankings/{1}/{2}/{3}?api_key={4}&name={5}".format(
-                self.BRAWL_API_BASE, bracket, region, page_number, brawl_key, player_name
+                self.BRAWL_API_BASE,
+                bracket,
+                region,
+                page_number,
+                brawl_key,
+                player_name,
             )
         ).json()
 

@@ -1,4 +1,8 @@
+from django.db.models import Q
+
 from marshmallow import Schema, fields
+
+from .models import BrawlhallaPlayerRankedTeam
 
 
 class BrawlhallaPlayerLegendSchema(Schema):
@@ -48,6 +52,19 @@ class BrawlhallaPlayerRankedLegendSchema(Schema):
     updated_at = fields.DateTime(dump_only=True)
 
 
+class BrawlhallaPlayerRankedTeamSchema(Schema):
+    brawlhalla_player_1 = fields.Integer()
+    brawlhalla_player_2 = fields.Integer()
+    rating = fields.Integer()
+    peak_rating = fields.Integer()
+    tier = fields.String()
+    wins = fields.Integer()
+    games = fields.Integer()
+    team_name = fields.String()
+    region = fields.String()
+    global_rank = fields.Integer()
+
+
 class BrawlhallaPlayerRankedSchema(Schema):
     rating = fields.Integer()
     peak_rating = fields.Integer()
@@ -59,6 +76,19 @@ class BrawlhallaPlayerRankedSchema(Schema):
     region_rank = fields.Integer()
     created_at = fields.DateTime(dump_only=True)
     updated_at = fields.DateTime(dump_only=True)
+    ranked_teams = fields.Method("get_ranked_teams")
+
+    def get_ranked_teams(self, ranked):
+        return (
+            BrawlhallaPlayerRankedTeamSchema(many=True).dump(
+                BrawlhallaPlayerRankedTeam.objects.filter(
+                    Q(brawlhalla_player_1=ranked.brawlhalla_player.brawlhalla_id)
+                    | Q(brawlhalla_player_2=ranked.brawlhalla_player.brawlhalla_id)
+                ).order_by("-games")
+            )
+            if BrawlhallaPlayerRankedTeam.objects.exists()
+            else None
+        )
 
 
 class BrawlhallaPlayerSchema(Schema):
