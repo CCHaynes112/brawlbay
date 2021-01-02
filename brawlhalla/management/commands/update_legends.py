@@ -14,7 +14,7 @@ class Command(BaseCommand):
             legend_id = legend["legend_id"]
             self.update_legend_detail(legend_id)
             time.sleep(5)
-            print("{0} updated/created".format(id))
+            print("{0} updated/created".format(legend_id))
         print("Finished updating legends")
 
     def update_legend_detail(self, legend_id):
