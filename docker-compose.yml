@@ -7,6 +7,8 @@ services:
     volumes:
       - .:/code
       - frontend_static:/etc/nginx/html/frontend_static
+    ports:
+      - 80:80
     depends_on:
       - django
 
@@ -27,7 +29,7 @@ services:
       context: ./
       dockerfile: ./frontend/Dockerfile
     volumes:
-      - ./frontend:/code:delegated
+      - ./frontend:/code
       - /code/node_modules
       - frontend_static:/code/build
     environment:
