@@ -6,6 +6,7 @@ services:
     image: nginx:1.18.0
     volumes:
       - .:/code
+      - frontend_static:/etc/nginx/html/frontend_static
     depends_on:
       - django
 
@@ -14,13 +15,11 @@ services:
     build: 
       context: .
       dockerfile: ./Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/code
+    command: gunicorn hello_django.wsgi:application --bind 0.0.0.0:8000
     expose:
       - "8000"
-    depends_on:
-      - postgres
+    volumes:
+      - .:/code
 
   frontend:
     container_name: frontend
@@ -30,7 +29,10 @@ services:
     volumes:
       - ./frontend:/code:delegated
       - /code/node_modules
+      - frontend_static:/code/build
+    environment:
+      - NODE_ENV=production
     command: npm run build
 
 volumes:
-  pg_data:
+  frontend_static:
