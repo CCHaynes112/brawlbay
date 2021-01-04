@@ -133,7 +133,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 MEDIA_URL = '/media/'
-STATIC_URL = '/django_static/' 
-STATIC_ROOT = os.path.join(BASE_DIR, 'django_static')
+STATIC_URL = '/django_static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'server/django_static')
 
 CORS_ORIGIN_ALLOW_ALL = True
