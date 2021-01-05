@@ -1,32 +1,36 @@
 import axios from 'axios';
 
-
+if (window.location.origin === "http://localhost:3000") {
+  axios.defaults.baseURL = "http://127.0.0.1:8000";
+} else {
+  axios.defaults.baseURL = window.location.origin;
+}
 
 class PlayerClient {
     static all(params) {
         return axios.get(
-            'http://localhost/api/brawlhalla/players',
+            '/api/brawlhalla/players',
             { params: params }
         );
     }
 
     static get(brawlhalla_id, params) {
         return axios.get(
-            `http://localhost/api/brawlhalla/players/${brawlhalla_id}`,
+            `/api/brawlhalla/players/${brawlhalla_id}`,
             { params: params }
         );
     }
 
     static leaderboard(params) {
         return axios.get(
-            'http://localhost/api/brawlhalla/players/leaderboard',
+            '/api/brawlhalla/players/leaderboard',
             { params: params }
         );
     }
 
     static search(params) {
         return axios.get(
-            'http://localhost/api/brawlhalla/players/search',
+            '/api/brawlhalla/players/search',
             { params: params }
         );
     }
