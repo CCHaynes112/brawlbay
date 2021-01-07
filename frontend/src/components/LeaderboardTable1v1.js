@@ -37,7 +37,6 @@ export default function LeaderboardTable1v1() {
                 page_number: pageNumber
             })
             .then(res => {
-                console.log(res.data.players)
                 setPlayerArray(res.data.players);
             })
             .catch(error => {

@@ -74,7 +74,6 @@ export default function PlayerResult(props) {
     useEffect(() => {
         PlayerClient.get(props.match.params.id)
             .then(res => {
-                console.log(res)
                 setPlayerObj(res.data.player);
                 setIsLoaded(true);
             })
