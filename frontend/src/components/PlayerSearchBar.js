@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ReactGA from 'react-ga';
+
 import { fade, makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
@@ -69,6 +71,10 @@ export default function PlayerSearchBar(props) {
     }
 
     const handleClickOpen = () => {
+        ReactGA.event({
+            category: "Player Search",
+            action: "User pressed the player search button",
+          });
         setOpen(true);
     };
 

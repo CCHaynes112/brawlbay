@@ -5,6 +5,8 @@ import {
   Route,
   //Link
 } from "react-router-dom";
+import ReactGA from 'react-ga';
+import { createBrowserHistory } from 'history';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,9 +22,17 @@ import Ranked1v1Leaderboard from './pages/Ranked1v1Leaderboard';
 import Ranked2v2Leaderboard from './pages/Ranked2v2Leaderboard';
 import PageNotFound from './pages/PageNotFound';
 
+
+const history = createBrowserHistory();
+history.listen(location => {
+  ReactGA.set({ page: location.pathname }); // Update the user's current page
+  ReactGA.pageview(location.pathname); // Record a pageview for the given page
+});
+
+
 export default function App() {
   return (
-    <Router>
+    <Router history={history}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Header>
