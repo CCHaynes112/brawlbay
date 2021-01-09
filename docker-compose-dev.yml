@@ -18,8 +18,8 @@ services:
         build:
             context: .
             dockerfile: ./docker/backend/Dockerfile
-        volumes:
-            
+        environment:
+            - DJANGO_SETTINGS_MODULE=brawlbackend.settings.dev_settings
         entrypoint: /app/docker/backend/wsgi-entrypoint.sh
         volumes:
             - static_volume:/app/backend/server/django_static
