@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
         minHeight: "100vh",
+        width: "100vw",
         //padding: theme.spacing(3),
     },
     logoContainer: {
