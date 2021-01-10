@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -29,7 +30,7 @@ export default function LegendCard(props) {
     const classes = useStyles();
 
     return (
-        <Link href={"/legends/" + props.legendID} underline="none">
+        <Link component={RouterLink} to={"/legends/" + props.legendID} underline="none">
             <Card elevation={2} className={classes.card}>
                 <CardMedia
                     className={classes.media}

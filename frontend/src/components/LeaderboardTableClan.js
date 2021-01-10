@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -41,7 +42,7 @@ export default function LeaderboardTableClan(props) {
                         <TableRow key={key}>
                             <TableCell>{player.rank}</TableCell>
                             <TableCell>
-                                <Link href={"/players/" + player.brawlhalla_id}>{player.name}</Link>
+                                <Link component={RouterLink} to={"/players/" + player.brawlhalla_id}>{player.name}</Link>
                             </TableCell>
                             <TableCell>{player.join_date}</TableCell>
                             <TableCell>{player.xp}</TableCell>

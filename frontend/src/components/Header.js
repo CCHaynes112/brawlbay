@@ -14,7 +14,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { useTheme } from '@material-ui/core/styles';
 import ToggleOffIcon from '@material-ui/icons/ToggleOff';
 import SettingsIcon from '@material-ui/icons/Settings';
-import Link from '@material-ui/core/Link';
 
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -108,10 +107,10 @@ function Header(props) {
                 <ListItem button component={RouterLink} to="/">
                     <ListItemText primary="Home" />
                 </ListItem>
-                {/* <ListItem button component={Link} to="/items">
+                {/* <ListItem button component={RouterLink} to="/items">
                     <ListItemText primary="Items" />
                 </ListItem>
-                <ListItem button component={Link} to="/legends">
+                <ListItem button component={RouterLink} to="/legends">
                     <ListItemText primary="Legends" />
                 </ListItem> */}
                 <ListItem>
@@ -123,28 +122,28 @@ function Header(props) {
                 <ListItem button className={classes.nested} component={RouterLink} to="/2v2leaderboard">
                     <ListItemText primary="2v2 Leaderboard" />
                 </ListItem>
-                {/* <ListItem button className={classes.nested} component={Link} to="/clanleaderboard">
+                {/* <ListItem button className={classes.nested} component={RouterLink} to="/clanleaderboard">
                     <ListItemText primary="Clan Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} to="/ratings">
+                <ListItem button className={classes.nested} component={RouterLink} to="/ratings">
                     <ListItemText primary="Rating Distribution" />
                 </ListItem>
                 <ListItem>
                     <ListItemText primary="Community" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} to="/streams">
+                <ListItem button className={classes.nested} component={RouterLink} to="/streams">
                     <ListItemText primary="Streams" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} to="/tournaments">
+                <ListItem button className={classes.nested} component={RouterLink} to="/tournaments">
                     <ListItemText primary="Tournaments" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} to="/videos">
+                <ListItem button className={classes.nested} component={RouterLink} to="/videos">
                     <ListItemText primary="Videos" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} to="/gifs">
+                <ListItem button className={classes.nested} component={RouterLink} to="/gifs">
                     <ListItemText primary="Gifs" />
                 </ListItem> */}
-                <ListItem button component={Link} to="/contact">
+                <ListItem button component={RouterLink} to="/contact">
                     <ListItemText primary="Contact" />
                 </ListItem>
             </List>

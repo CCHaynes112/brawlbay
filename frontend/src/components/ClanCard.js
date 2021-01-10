@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -32,7 +33,7 @@ export default function ClanCard(props) {
     const classes = useStyles();
 
     return (
-        <Link href={"/clans/" + props.clanID} underline="none">
+        <Link component={RouterLink} to={"/clans/" + props.clanID} underline="none">
             <Card elevation={2} className={classes.root}>
                 <CardMedia
                     className={classes.media}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -63,10 +64,10 @@ export default function LeaderboardTable2v2() {
                         <TableRow key={key}>
                             <TableCell>{team.rank}</TableCell>
                             <TableCell>
-                                <Link href={"/players/" + team.brawlhalla_id_one}>{team.teamname.split("+")[0]}</Link>
+                                <Link component={RouterLink} to={"/players/" + team.brawlhalla_id_one}>{team.teamname.split("+")[0]}</Link>
                             </TableCell>
                             <TableCell>
-                                <Link href={"/players/" + team.brawlhalla_id_two}>{team.teamname.split("+")[1]}</Link>
+                                <Link component={RouterLink} to={"/players/" + team.brawlhalla_id_two}>{team.teamname.split("+")[1]}</Link>
                             </TableCell>
                             <TableCell>{Math.round((team.wins / team.games) * 100) + "%"}</TableCell>
                             <TableCell>{team.rating}</TableCell>

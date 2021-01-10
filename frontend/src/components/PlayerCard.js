@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -26,7 +27,7 @@ export default function PlayerCard(props) {
     const classes = useStyles();
 
     return (
-        <Link href={"/players/" + props.playerID} underline="none">
+        <Link component={RouterLink} to={"/players/" + props.playerID} underline="none">
             <Card elevation={2} className={classes.card}>
                 <CardActionArea>
                     {props.legendImg != null &&
