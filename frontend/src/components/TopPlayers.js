@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: "2rem",
     },
     topPlayers: {
-        width: 500,
+        width: "50%",
         marginBottom: 30,
     },
     cardContainer: {
