@@ -16,6 +16,9 @@ import ToggleOffIcon from '@material-ui/icons/ToggleOff';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Link from '@material-ui/core/Link';
 
+import { Link as RouterLink } from 'react-router-dom';
+
+
 import PlayerSearchBar from "./PlayerSearchBar";
 
 import logo from './assets/img/Logo-Black.png';
@@ -98,50 +101,50 @@ function Header(props) {
     const drawer = (
         <div>
             <div className={classes.logoContainer}>
-                <Link href="/" className={classes.logo}><img src={logo} alt="Logo" /></Link>
+                <RouterLink to="/" className={classes.logo}><img src={logo} alt="Logo" /></RouterLink>
             </div>
             <Divider />
             <List className={classes.drawerList}>
-                <ListItem button component={Link} href="/">
+                <ListItem button component={RouterLink} to="/">
                     <ListItemText primary="Home" />
                 </ListItem>
-                {/* <ListItem button component={Link} href="/items">
+                {/* <ListItem button component={Link} to="/items">
                     <ListItemText primary="Items" />
                 </ListItem>
-                <ListItem button component={Link} href="/legends">
+                <ListItem button component={Link} to="/legends">
                     <ListItemText primary="Legends" />
                 </ListItem> */}
                 <ListItem>
                     <ListItemText primary="Rankings" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} href="/1v1leaderboard">
+                <ListItem button className={classes.nested} component={RouterLink} to="/1v1leaderboard">
                     <ListItemText primary="1v1 Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} href="/2v2leaderboard">
+                <ListItem button className={classes.nested} component={RouterLink} to="/2v2leaderboard">
                     <ListItemText primary="2v2 Leaderboard" />
                 </ListItem>
-                {/* <ListItem button className={classes.nested} component={Link} href="/clanleaderboard">
+                {/* <ListItem button className={classes.nested} component={Link} to="/clanleaderboard">
                     <ListItemText primary="Clan Leaderboard" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} href="/ratings">
+                <ListItem button className={classes.nested} component={Link} to="/ratings">
                     <ListItemText primary="Rating Distribution" />
                 </ListItem>
                 <ListItem>
                     <ListItemText primary="Community" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} href="/streams">
+                <ListItem button className={classes.nested} component={Link} to="/streams">
                     <ListItemText primary="Streams" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} href="/tournaments">
+                <ListItem button className={classes.nested} component={Link} to="/tournaments">
                     <ListItemText primary="Tournaments" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} href="/videos">
+                <ListItem button className={classes.nested} component={Link} to="/videos">
                     <ListItemText primary="Videos" />
                 </ListItem>
-                <ListItem button className={classes.nested} component={Link} href="/gifs">
+                <ListItem button className={classes.nested} component={Link} to="/gifs">
                     <ListItemText primary="Gifs" />
                 </ListItem> */}
-                <ListItem button component={Link} href="/contact">
+                <ListItem button component={Link} to="/contact">
                     <ListItemText primary="Contact" />
                 </ListItem>
             </List>
