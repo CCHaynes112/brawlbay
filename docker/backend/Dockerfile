@@ -10,3 +10,4 @@ RUN pip install -r backend/requirements.txt
 
 ADD ./docker /app/docker
 ADD ./backend /app/backend
+WORKDIR /app/backend
