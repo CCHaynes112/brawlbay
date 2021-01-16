@@ -1,5 +1,11 @@
 from django.urls import path
-from .views import BrawlhallaPlayerView, BrawlhallaPlayersView, BrawlhallaLeaderboardView, BrawlhallaPlayerSearchView
+from .views import (
+    BrawlhallaPlayerView,
+    BrawlhallaPlayersView,
+    BrawlhallaLeaderboardView,
+    BrawlhallaPlayerSearchView,
+    send_email,
+)
 
 urlpatterns = [
     path(
@@ -21,5 +27,10 @@ urlpatterns = [
         "players/search",
         BrawlhallaPlayerSearchView.as_view(),
         name="brawlhalla_players_search_view",
+    ),
+    path(
+        "send_email",
+        send_email,
+        name="send_email",
     ),
 ]

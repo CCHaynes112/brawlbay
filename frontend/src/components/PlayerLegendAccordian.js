@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-
+import ReactGA from 'react-ga';
 import BarChart from './charts/BarChart';
 import DoughnutChart from './charts/DoughnutChart';
 import PieChart from './charts/PieChart';

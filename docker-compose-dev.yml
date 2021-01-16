@@ -2,6 +2,7 @@ version: '2'
 
 services:
     nginx: 
+        container_name: nginx
         restart: unless-stopped
         build:
             context: .
@@ -14,6 +15,7 @@ services:
         depends_on: 
             - backend
     backend:
+        container_name: backend
         restart: unless-stopped
         build:
             context: .
@@ -25,7 +27,10 @@ services:
             - .:/app:delegated
             - static_volume:/app/backend/server/django_static
         expose:
-            - 8000        
+            - 8000    
+        stdin_open: true
+        tty: true
+    
     frontend:
         container_name: frontend
         ports:
@@ -40,6 +45,18 @@ services:
             - NODE_ENV=development
             - CHOKIDAR_USEPOLLING=true
         command: npm start
+    postgres:
+        container_name: postgres
+        image: postgres:11.5-alpine
+        environment:
+        - POSTGRES_PASSWORD=brawlbay
+        - POSTGRES_USER=postgres
+        - POSTGRES_DB=brawlbay
+        volumes:
+        - pg_data:/var/lib/postgresql/data
+        ports:
+        - "5433:5432"
 
 volumes:
     static_volume: {}
+    pg_data: 

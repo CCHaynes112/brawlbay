@@ -36,5 +36,14 @@ class PlayerClient {
     }
 }
 
+class UtilityClient {
+    static sendEmail(params) {
+        return axios.post(
+            '/api/brawlhalla/send_email',
+            { params: params }
+        );
+    }
+}
 
-export { PlayerClient }
+
+export { PlayerClient, UtilityClient }

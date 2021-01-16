@@ -7,6 +7,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 import datetime
 import re
+import json
+from django.views.decorators.csrf import csrf_exempt
+from django.core.mail import BadHeaderError, send_mail
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 
 class BrawlhallaPlayerView(View):
@@ -56,7 +60,9 @@ class BrawlhallaLeaderboardView(View):
         )
         bracket = request.GET.get("bracket") if "bracket" in request.GET else "1v1"
         region = request.GET.get("region") if "region" in request.GET else "all"
-        page_number = request.GET.get("page_number") if "page_number" in request.GET else "1"
+        page_number = (
+            request.GET.get("page_number") if "page_number" in request.GET else "1"
+        )
 
         data = BrawlhallaClient().get_leaderboard_data(bracket, region, page_number)[
             :player_count_filter
@@ -86,3 +92,24 @@ class BrawlhallaPlayerSearchView(View):
                 return JsonResponse({"players": data})
         # Failed to find user
         return JsonResponse({"error": "Couldn't find player"})
+
+
+@csrf_exempt
+def send_email(request):
+    print("~Sending email~")
+    payload = json.loads(request.body).get("params", "")
+    print(payload)
+    subject = payload.get("subject", "")
+    message = payload.get("message", "")
+    email = payload.get("email", "")
+
+    if subject and message and email:
+        try:
+            send_mail(subject, message, f"Brawlbay <{email}>", ["CCHaynes1122@gmail.com"])
+        except BadHeaderError:
+            return HttpResponse("Invalid header found.")
+        return JsonResponse({"data": "Email sent"})
+    else:
+        # In reality we'd use a form class
+        # to get proper validation errors.
+        return HttpResponse("Make sure all fields are entered and valid.")
