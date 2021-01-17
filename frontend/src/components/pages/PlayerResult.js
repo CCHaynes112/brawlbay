@@ -85,7 +85,7 @@ export default function PlayerResult(props) {
     if (failed) {
         page = (
             <div className={classes.textCenter}>
-                <Typography variant="h3">Played not found.</Typography>
+                <Typography variant="h3">Player not found.</Typography>
             </div>
         )
     }
