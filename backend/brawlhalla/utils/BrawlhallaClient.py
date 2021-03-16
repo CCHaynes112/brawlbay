@@ -190,9 +190,8 @@ class BrawlhallaDataConverter:
                 member_id = member.pop("brawlhalla_id")
                 if member_id == id:
                     BrawlhallaClanPlayer.objects.update_or_create(
-                        clan=clan,
                         player=player,
-                        defaults=member,
+                        defaults={**member, "clan": clan},
                     )
 
         # Update ranked

@@ -96,9 +96,7 @@ class BrawlhallaPlayerSearchView(View):
 
 @csrf_exempt
 def send_email(request):
-    print("~Sending email~")
     payload = json.loads(request.body).get("params", "")
-    print(payload)
     subject = payload.get("subject", "")
     message = payload.get("message", "")
     email = payload.get("email", "")
