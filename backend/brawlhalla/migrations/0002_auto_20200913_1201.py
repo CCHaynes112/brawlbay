@@ -7,42 +7,61 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('brawlhalla', '0001_initial'),
+        ("brawlhalla", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='BrawlhallaClanPlayer',
+            name="BrawlhallaClanPlayer",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('rank', models.CharField(max_length=32)),
-                ('join_date', models.DateTimeField()),
-                ('xp', models.IntegerField()),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('clan', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='clan_members', to='brawlhalla.BrawlhallaClan')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("rank", models.CharField(max_length=32)),
+                ("join_date", models.DateTimeField()),
+                ("xp", models.IntegerField()),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "clan",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="clan_members",
+                        to="brawlhalla.BrawlhallaClan",
+                    ),
+                ),
             ],
         ),
         migrations.RenameField(
-            model_name='brawlhallaplayerlegend',
-            old_name='brawlhalla_user',
-            new_name='brawlhalla_player',
+            model_name="brawlhallaplayerlegend",
+            old_name="brawlhalla_user",
+            new_name="brawlhalla_player",
         ),
         migrations.RenameField(
-            model_name='brawlhallaplayerranked',
-            old_name='brawlhalla_user',
-            new_name='brawlhalla_player',
+            model_name="brawlhallaplayerranked",
+            old_name="brawlhalla_user",
+            new_name="brawlhalla_player",
         ),
         migrations.RenameModel(
-            old_name='BrawlhallaUser',
-            new_name='BrawlhallaPlayer',
+            old_name="BrawlhallaUser",
+            new_name="BrawlhallaPlayer",
         ),
         migrations.DeleteModel(
-            name='BrawlhallaClanUser',
+            name="BrawlhallaClanUser",
         ),
         migrations.AddField(
-            model_name='brawlhallaclanplayer',
-            name='player',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='clan_profile', to='brawlhalla.BrawlhallaPlayer'),
+            model_name="brawlhallaclanplayer",
+            name="player",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="clan_profile",
+                to="brawlhalla.BrawlhallaPlayer",
+            ),
         ),
     ]

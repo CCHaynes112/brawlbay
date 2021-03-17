@@ -15,17 +15,17 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 class BrawlhallaPlayerView(View):
     def get(self, request, brawlhalla_id):
+        REFRESH_WAIT_TIME = 0
+        refresh = request.GET.get("refresh") if "refresh" in request.GET else False
         try:
             player = BrawlhallaPlayer.objects.get(brawlhalla_id=brawlhalla_id)
-            if timezone.now() - player.updated_at < datetime.timedelta(minutes=30):
-                return JsonResponse({"player": BrawlhallaPlayerSchema().dump(player)})
-            else:
-                updated_player = BrawlhallaDataConverter().update_all_player_data(
-                    brawlhalla_id
-                )
-                return JsonResponse(
-                    {"player": BrawlhallaPlayerSchema().dump(updated_player)}
-                )
+            if refresh and timezone.now() - player.updated_at >= datetime.timedelta(
+                minutes=REFRESH_WAIT_TIME
+            ):
+                player = BrawlhallaDataConverter().update_all_player_data(brawlhalla_id)
+            return JsonResponse(
+                {"player": BrawlhallaPlayerSchema().dump(player)}
+            )
         except ObjectDoesNotExist:
             created_player = BrawlhallaDataConverter().update_all_player_data(
                 brawlhalla_id
@@ -103,7 +103,9 @@ def send_email(request):
 
     if subject and message and email:
         try:
-            send_mail(subject, message, f"Brawlbay <{email}>", ["CCHaynes1122@gmail.com"])
+            send_mail(
+                subject, message, f"Brawlbay <{email}>", ["CCHaynes1122@gmail.com"]
+            )
         except BadHeaderError:
             return HttpResponse("Invalid header found.")
         return JsonResponse({"data": "Email sent"})

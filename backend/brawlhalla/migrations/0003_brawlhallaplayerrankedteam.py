@@ -7,24 +7,46 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('brawlhalla', '0002_auto_20200913_1201'),
+        ("brawlhalla", "0002_auto_20200913_1201"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='BrawlhallaPlayerRankedTeam',
+            name="BrawlhallaPlayerRankedTeam",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('rating', models.IntegerField()),
-                ('peak_rating', models.IntegerField()),
-                ('tier', models.CharField(max_length=32)),
-                ('wins', models.IntegerField()),
-                ('games', models.IntegerField()),
-                ('team_name', models.CharField(max_length=128)),
-                ('region', models.CharField(max_length=64)),
-                ('global_rank', models.IntegerField()),
-                ('brawlhalla_player_1', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='team_member_one_of', to='brawlhalla.BrawlhallaPlayer')),
-                ('brawlhalla_player_2', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='team_member_two_of', to='brawlhalla.BrawlhallaPlayer')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("rating", models.IntegerField()),
+                ("peak_rating", models.IntegerField()),
+                ("tier", models.CharField(max_length=32)),
+                ("wins", models.IntegerField()),
+                ("games", models.IntegerField()),
+                ("team_name", models.CharField(max_length=128)),
+                ("region", models.CharField(max_length=64)),
+                ("global_rank", models.IntegerField()),
+                (
+                    "brawlhalla_player_1",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="team_member_one_of",
+                        to="brawlhalla.BrawlhallaPlayer",
+                    ),
+                ),
+                (
+                    "brawlhalla_player_2",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="team_member_two_of",
+                        to="brawlhalla.BrawlhallaPlayer",
+                    ),
+                ),
             ],
         ),
     ]
