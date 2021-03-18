@@ -1,6 +1,7 @@
 from secret_keys import brawl_key
 import requests
-import time
+import datetime
+from django.utils.timezone import make_aware
 from ..models import (
     BrawlhallaPlayer,
     BrawlhallaPlayerLegend,
@@ -139,8 +140,8 @@ class BrawlhallaDataConverter:
             "general_data": {
                 "clan_id": clan_json["clan_id"],
                 "clan_name": clan_json["clan_name"],
-                "clan_create_date": time.strftime(
-                    "%Y-%m-%d %H:%M:%S", time.localtime(clan_json["clan_create_date"])
+                "clan_create_date": make_aware(
+                    datetime.datetime.fromtimestamp(clan_json["clan_create_date"])
                 ),
                 "clan_xp": clan_json["clan_xp"],
             },
@@ -151,8 +152,8 @@ class BrawlhallaDataConverter:
                 {
                     "brawlhalla_id": member["brawlhalla_id"],
                     "rank": member["rank"],
-                    "join_date": time.strftime(
-                        "%Y-%m-%d %H:%M:%S", time.localtime(member["join_date"])
+                    "join_date": make_aware(
+                        datetime.datetime.fromtimestamp(member["join_date"])
                     ),
                     "xp": member["xp"],
                 }

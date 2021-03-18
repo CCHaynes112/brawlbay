@@ -122,3 +122,12 @@ STATIC_URL = "/django_static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "server/django_static")
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+import warnings
+
+warnings.filterwarnings(
+    "error",
+    r"DateTimeField .* received a naive datetime",
+    RuntimeWarning,
+    r"django\.db\.models\.fields",
+)

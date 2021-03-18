@@ -91,6 +91,13 @@ class BrawlhallaPlayerRankedSchema(Schema):
         )
 
 
+class BrawlhallaClanSchema(Schema):
+    clan_id = fields.Integer()
+    clan_name = fields.String()
+    clan_create_date = fields.DateTime()
+    clan_xp = fields.Integer()
+
+
 class BrawlhallaPlayerSchema(Schema):
     brawlhalla_id = fields.Integer()
     name = fields.String()
@@ -113,6 +120,7 @@ class BrawlhallaPlayerSchema(Schema):
     best_legend = fields.Method("get_best_legend")
     ranked = fields.Method("get_ranked")
     legends = fields.Method("get_legends")
+    clan = fields.Method("get_clan")
 
     def get_legends(self, player):
         return (
@@ -134,5 +142,12 @@ class BrawlhallaPlayerSchema(Schema):
         return (
             player.legends.all().order_by("-wins").first().legend.legend_id
             if player.legends.exists()
+            else None
+        )
+
+    def get_clan(self, player):
+        return (
+            BrawlhallaClanSchema().dump(player.clan_profile.clan)
+            if hasattr(player, "clan_profile")
             else None
         )

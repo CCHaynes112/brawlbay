@@ -38,7 +38,7 @@ export default function ClanCard(props) {
                 <CardMedia
                     className={classes.media}
                     image={headerImg}
-                    title="ClanImg"
+                    title={props.clanName}
                 />
                 <CardContent className={classes.cardcontent}>
                     <Typography variant="h6">Clan</Typography>
