@@ -4,12 +4,10 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
 import RankedCard1v1 from './RankedCard1v1';
+import { Fragment } from 'react';
 
 
 const useStyles = makeStyles(theme => ({
-    root: {
-
-    },
     paper: {
         width: "100%",
         height: "17rem",
@@ -30,7 +28,7 @@ export default function RankedCard2v2(props) {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
+        <Fragment>
             {
                 props.error ? (<Paper className={classes.no2v2}>
                     <Typography variant="h6">Oops, no 2v2 data...</Typography>
@@ -55,7 +53,7 @@ export default function RankedCard2v2(props) {
                         }
                     </Paper>
             }
-        </div>
+        </Fragment>
     );
 }
 

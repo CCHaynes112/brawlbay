@@ -57,6 +57,18 @@ const useStyles = makeStyles(theme => ({
         margin: "auto",
         paddingBottom: 20,
     },
+    refreshButton: {
+        color: "#fff",
+        position: "absolute",
+        [theme.breakpoints.down('lg')]: {
+            top: 260,
+            left: 560,
+        },
+        [theme.breakpoints.down('sm')]: {
+            top: 70,
+            left: 100,
+        },
+    },
 }));
 
 export default function PlayerResult(props) {

@@ -18,15 +18,16 @@ const useStyles = makeStyles(theme => ({
 
     content: {
         padding: 5,
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingLeft: 10,
+        paddingRight: 10,
         justifyContent: "space-between",
     },
     imgContainer: {
         margin: "auto",
+        paddingRight: 10,
     },
     rankImg: {
-        width: "100px",
+        width: "100%",
     },
 
     rankFields: {
@@ -73,7 +74,7 @@ export default function RankedCard2v2(props) {
                                 <Grid className={classes.imgContainer} item lg={4}>
                                     <img src={props.rankedImg} alt="Rank" className={classes.rankImg} />
                                 </Grid>
-                                <Grid item lg={3} className={classes.rankFields}>
+                                <Grid item lg={5} className={classes.rankFields}>
                                     <Typography variant="body1">Region</Typography>
                                     <Typography variant="body1">Rank</Typography>
                                     <Typography variant="body1">Peak Rating</Typography>
@@ -82,7 +83,7 @@ export default function RankedCard2v2(props) {
                                     <Typography variant="body1">Wins</Typography>
                                     <Typography variant="body1">Losses</Typography>
                                 </Grid>
-                                <Grid item lg={5} className={classes.rankValues}>
+                                <Grid item lg={3} className={classes.rankValues}>
                                     <Typography variant="body1">{props.region}</Typography>
                                     <Typography variant="body1">{props.rank}</Typography>
                                     <Typography variant="body1">{props.peakRating}</Typography>
