@@ -6,6 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import RankedCard1v1 from '../RankedCard1v1';
 import RankedCard2v2 from '../RankedCard2v2';
@@ -17,6 +20,11 @@ import { PlayerClient } from '../../api_agent';
 
 import headerImg from '../assets/img/maps/Ship.png';
 import PlayerLegendAccordian from '../PlayerLegendAccordian';
+
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -76,6 +84,9 @@ export default function PlayerResult(props) {
     const [playerObj, setPlayerObj] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
     const [failed, setFailed] = useState(false);
+    const [notificationOpen, setNotificationOpen] = useState(false);
+    const [refreshButtonContent, setRefreshButtonContent] = useState("Refresh Player")
+
 
     let page = (
         <div className={classes.textCenter}>
@@ -93,6 +104,28 @@ export default function PlayerResult(props) {
                 setFailed(true);
             })
     }, [props.match.params.id]);
+
+    const refreshUser = () => {
+        setRefreshButtonContent("Refreshing player...")
+        PlayerClient.get(props.match.params.id, { refresh: true })
+            .then(res => {
+                setRefreshButtonContent("Refresh Player");
+                setNotificationOpen(true);
+                setPlayerObj(res.data.player);
+                setIsLoaded(true);
+            })
+            .catch(error => {
+                setFailed(true);
+            })
+    }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setNotificationOpen(false);
+    };
 
     if (failed) {
         page = (
@@ -121,6 +154,7 @@ export default function PlayerResult(props) {
                                 wins={playerObj.wins}
                                 losses={playerObj.games - playerObj.wins}
                             />
+                            <Button onClick={refreshUser} className={classes.refreshButton} variant="contained" color="secondary">{refreshButtonContent}</Button>
                         </Grid>
                         <Grid item lg={12} className={classes.overviewItems}>
                             <Paper className={classes.winRateChart}>
@@ -173,6 +207,11 @@ export default function PlayerResult(props) {
     return (
         <div>
             {page}
+            <Snackbar open={notificationOpen} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">
+                    Player Updated
+                </Alert>
+            </Snackbar>
         </div>
     );
 }
