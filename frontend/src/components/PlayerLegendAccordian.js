@@ -1,42 +1,42 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import ReactGA from 'react-ga';
-import BarChart from './charts/BarChart';
-import DoughnutChart from './charts/DoughnutChart';
-import PieChart from './charts/PieChart';
+import PropTypes from 'prop-types'
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import Typography from '@material-ui/core/Typography'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import Grid from '@material-ui/core/Grid'
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import BarChart from './charts/BarChart'
+import DoughnutChart from './charts/DoughnutChart'
+import PieChart from './charts/PieChart'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '100%'
   },
   subContainer: {
-    alignItems: 'center',
+    alignItems: 'center'
   },
   heading: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   headingTitle: {
-    marginLeft: 15,
+    marginLeft: 15
   },
   chartContainer: {
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   button: {
-    color: theme.palette.text.secondary,
-  },
-}));
+    color: theme.palette.text.secondary
+  }
+}))
 
-export default function PlayerLegendAccordian(props) {
-  const classes = useStyles();
+export default function PlayerLegendAccordian (props) {
+  const classes = useStyles()
 
   return (
     <div className={classes.root}>
@@ -104,10 +104,16 @@ export default function PlayerLegendAccordian(props) {
                 </Grid>
               </Grid>
             </ExpansionPanelDetails>
-          </ExpansionPanel>,
+          </ExpansionPanel>
         )
       }
 
     </div>
-  );
+  )
+}
+
+PlayerLegendAccordian.propTypes = {
+  legends: PropTypes.shape({
+    map: PropTypes.func
+  })
 }

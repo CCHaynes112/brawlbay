@@ -1,10 +1,9 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import LinkedIn from '@material-ui/icons/LinkedIn';
-import GitHub from '@material-ui/icons/GitHub';
-
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import IconButton from '@material-ui/core/IconButton'
+import LinkedIn from '@material-ui/icons/LinkedIn'
+import GitHub from '@material-ui/icons/GitHub'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,18 +12,18 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     padding: 5,
     overflow: 'auto',
-    width: '100%',
+    width: '100%'
   },
   content: {
-    float: 'right',
+    float: 'right'
   },
   white: {
-    color: theme.palette.text.secondary,
-  },
-}));
+    color: theme.palette.text.secondary
+  }
+}))
 
-export default function Header() {
-  const classes = useStyles();
+export default function Header () {
+  const classes = useStyles()
 
   return (
     <footer className={classes.root}>
@@ -40,5 +39,5 @@ export default function Header() {
         </IconButton>
       </div>
     </footer>
-  );
+  )
 }

@@ -1,89 +1,89 @@
-import React, {useEffect, useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React, { useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
 
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga'
 
-import ContentHeader from '../ContentHeader';
-import {UtilityClient} from '../../api_agent';
+import ContentHeader from '../ContentHeader'
+import { UtilityClient } from '../../api_agent'
 
-import headerImg from '../assets/img/maps/13 - qCo0Jbj.jpg';
-import tinRank from '../assets/img/Rankings/Tin.png';
+import headerImg from '../assets/img/maps/13 - qCo0Jbj.jpg'
+import tinRank from '../assets/img/Rankings/Tin.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 60,
+    marginTop: 60
   },
   paper: {
     padding: 40,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   gridContainer: {
     justifyContent: 'center',
-    marginTop: 50,
+    marginTop: 50
   },
   img: {
-    width: '100%',
+    width: '100%'
   },
   form: {
     display: 'grid',
     width: '80%',
-    margin: 'auto',
+    margin: 'auto'
   },
   textField: {
-    color: theme.palette.text.primary,
+    color: theme.palette.text.primary
   },
   button: {
     color: theme.palette.text.secondary,
     width: '30%',
-    margin: 30,
-  },
-}));
+    margin: 30
+  }
+}))
 
-export default function Contact() {
-  const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+export default function Contact () {
+  const classes = useStyles()
+  const [email, setEmail] = useState('')
+  const [subject, setSubject] = useState('')
+  const [message, setMessage] = useState('')
 
   const handleEmail = (event) => {
-    setEmail(event.target.value);
-  };
+    setEmail(event.target.value)
+  }
 
   const handleSubject = (event) => {
-    setSubject(event.target.value);
-  };
+    setSubject(event.target.value)
+  }
 
   const handleMessage = (event) => {
-    setMessage(event.target.value);
-  };
+    setMessage(event.target.value)
+  }
 
   const sendEmail = (event) => {
     ReactGA.event({
       category: 'Send Email',
-      action: 'User pressed the send email button',
-    });
+      action: 'User pressed the send email button'
+    })
     const data = {
-      'email': email,
-      'subject': subject,
-      'message': message,
-    };
+      email: email,
+      subject: subject,
+      message: message
+    }
     UtilityClient.sendEmail(data)
-        .then((res) => {
-          setEmail('');
-          setSubject('');
-          setMessage('');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-  };
+      .then((res) => {
+        setEmail('')
+        setSubject('')
+        setMessage('')
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
   return (
     <div className={classes.root}>
@@ -101,7 +101,7 @@ export default function Contact() {
               <form noValidate className={classes.form}>
                 <TextField
                   InputLabelProps={{
-                    className: classes.textField,
+                    className: classes.textField
                   }}
                   label="Email"
                   required
@@ -110,7 +110,7 @@ export default function Contact() {
                 />
                 <TextField
                   InputLabelProps={{
-                    className: classes.textField,
+                    className: classes.textField
                   }}
                   label="Subject"
                   required
@@ -121,7 +121,7 @@ export default function Contact() {
                   multiline
                   rows={4}
                   InputLabelProps={{
-                    className: classes.textField,
+                    className: classes.textField
                   }}
                   label="Message"
                   required
@@ -135,5 +135,5 @@ export default function Contact() {
         </Paper>
       </Container>
     </div >
-  );
+  )
 }

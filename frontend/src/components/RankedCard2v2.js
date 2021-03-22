@@ -1,17 +1,16 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
+import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
 
-import RankedCard1v1 from './RankedCard1v1';
-import {Fragment} from 'react';
-
+import RankedCard1v1 from './RankedCard1v1'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     height: '17rem',
-    overflow: 'auto',
+    overflow: 'auto'
   },
   no2v2: {
     display: 'flex',
@@ -19,21 +18,21 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     width: '100%',
     height: '15rem',
-    overflow: 'auto',
-  },
-}));
+    overflow: 'auto'
+  }
+}))
 
-
-export default function RankedCard2v2(props) {
-  const classes = useStyles();
+export default function RankedCard2v2 (props) {
+  const classes = useStyles()
 
   return (
     <Fragment>
       {
-                props.error ? (<Paper className={classes.no2v2}>
+                props.error
+                  ? (<Paper className={classes.no2v2}>
                   <Typography variant="h6">Oops, no 2v2 data...</Typography>
-                </Paper>) :
-                    <Paper className={classes.paper}>
+                </Paper>)
+                  : <Paper className={classes.paper}>
                       {
                         props.teams.map((team, key) => (
                           <RankedCard1v1
@@ -54,7 +53,12 @@ export default function RankedCard2v2(props) {
                     </Paper>
       }
     </Fragment>
-  );
+  )
 }
 
-
+RankedCard2v2.propTypes = {
+  error: PropTypes.bool,
+  teams: PropTypes.shape({
+    map: PropTypes.func
+  })
+}

@@ -1,10 +1,10 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
-
+import PropTypes from 'prop-types'
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
+import Grid from '@material-ui/core/Grid'
+import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,29 +13,29 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     height: '17rem',
-    overflow: 'auto',
+    overflow: 'auto'
   },
 
   content: {
     padding: 5,
     paddingLeft: 10,
     paddingRight: 10,
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   imgContainer: {
     margin: 'auto',
-    paddingRight: 10,
+    paddingRight: 10
   },
   rankImg: {
-    width: '100%',
+    width: '100%'
   },
 
   rankFields: {
-    textAlign: 'left',
+    textAlign: 'left'
   },
 
   rankValues: {
-    textAlign: 'right',
+    textAlign: 'right'
   },
   no1v1: {
     display: 'flex',
@@ -43,23 +43,23 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     width: '100%',
     height: '15rem',
-    overflow: 'auto',
-  },
-}));
+    overflow: 'auto'
+  }
+}))
 
-
-export default function RankedCard2v2(props) {
-  const classes = useStyles();
+export default function RankedCard2v2 (props) {
+  const classes = useStyles()
 
   return (
     <div className={classes.root}>
       {
-                props.error ? (
+                props.error
+                  ? (
                     <Paper className={classes.no1v1}>
                       <Typography variant="h6">Oops, no 1v1 data...</Typography>
                     </Paper>
-                ) :
-                    (
+                    )
+                  : (
                         <Paper className={classes.paper}>
                           <Grid container className={classes.content}>
                             <Grid item>
@@ -98,5 +98,19 @@ export default function RankedCard2v2(props) {
       }
 
     </div>
-  );
+  )
+}
+
+RankedCard2v2.propTypes = {
+  currentRating: PropTypes.number,
+  error: PropTypes.bool,
+  games: PropTypes.number,
+  losses: PropTypes.number,
+  peakRating: PropTypes.number,
+  playerName: PropTypes.string,
+  rank: PropTypes.number,
+  rankedImg: PropTypes.string,
+  region: PropTypes.string,
+  type: PropTypes.string,
+  wins: PropTypes.number
 }

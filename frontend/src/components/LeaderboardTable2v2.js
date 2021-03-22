@@ -1,48 +1,48 @@
-import React, {useEffect, useState} from 'react';
-import {Link as RouterLink} from 'react-router-dom';
-import {makeStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
-import theme from '../theme';
+import React, { useEffect, useState } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import Button from '@material-ui/core/Button'
+import Link from '@material-ui/core/Link'
+import theme from '../theme'
 
-import {PlayerClient} from '../api_agent';
+import { PlayerClient } from '../api_agent'
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 650
   },
   tableHeader: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.main
   },
   tableHeaderText: {
-    color: theme.palette.text.secondary,
-  },
-});
+    color: theme.palette.text.secondary
+  }
+})
 
-export default function LeaderboardTable2v2() {
-  const classes = useStyles();
-  const [pageNumber, setPageNumber] = useState(1);
-  const [teamArray, setTeamArray] = useState([]);
+export default function LeaderboardTable2v2 () {
+  const classes = useStyles()
+  const [pageNumber, setPageNumber] = useState(1)
+  const [teamArray, setTeamArray] = useState([])
 
   useEffect(() => {
     PlayerClient.leaderboard({
       bracket: '2v2',
-      page_number: pageNumber,
+      page_number: pageNumber
     })
-        .then((res) => {
-          setTeamArray(res.data.players);
-        })
-        .catch((error) => {
-          console.log(error.data);
-        });
-  }, [pageNumber]);
+      .then((res) => {
+        setTeamArray(res.data.players)
+      })
+      .catch((error) => {
+        console.log(error.data)
+      })
+  }, [pageNumber])
 
   return (
     <TableContainer component={Paper}>
@@ -78,25 +78,25 @@ export default function LeaderboardTable2v2() {
           ))}
         </TableBody>
       </Table>
-      <div style={{float: 'right'}}>
+      <div style={{ float: 'right' }}>
         {
-                    pageNumber > 1 ?
-                        (
+                    pageNumber > 1
+                      ? (
                             <span>
                               <Button onClick={() => {
-                                setPageNumber(1);
+                                setPageNumber(1)
                               }} color="primary">Top</Button>
                               <Button onClick={() => {
-                                setPageNumber(pageNumber - 1);
+                                setPageNumber(pageNumber - 1)
                               }} color="primary">Previous</Button>
                             </span>
-                        ) :
-                        null
+                        )
+                      : null
         }
         <Button onClick={() => {
-          setPageNumber(pageNumber + 1);
+          setPageNumber(pageNumber + 1)
         }} color="primary">Next</Button>
       </div>
     </TableContainer>
-  );
+  )
 }

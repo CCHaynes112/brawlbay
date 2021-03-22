@@ -1,8 +1,9 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types'
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,10 +11,10 @@ const useStyles = makeStyles((theme) => ({
   },
   imgConainer: {
     height: 255,
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   headerImg: {
-    width: '100%',
+    width: '100%'
   },
   title: {
     position: 'relative',
@@ -22,14 +23,14 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 'fit-content',
     width: '40%',
     padding: 5,
-    textAlign: 'center',
-  },
-}));
+    textAlign: 'center'
+  }
+}))
 
-export default function Home(props) {
-  const classes = useStyles();
+export default function ContentHeader (props) {
+  const classes = useStyles()
 
-  let headerContent;
+  let headerContent
   if (!props.profile) {
     headerContent = (
       <Grid container>
@@ -39,7 +40,7 @@ export default function Home(props) {
           </Paper>
         </Grid>
       </Grid>
-    );
+    )
   }
 
   return (
@@ -49,5 +50,11 @@ export default function Home(props) {
       </div>
       {headerContent}
     </div>
-  );
+  )
+}
+
+ContentHeader.propTypes = {
+  headerImg: PropTypes.string,
+  profile: PropTypes.bool,
+  title: PropTypes.string
 }

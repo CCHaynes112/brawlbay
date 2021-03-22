@@ -23,9 +23,7 @@ class BrawlhallaPlayerView(View):
                 minutes=REFRESH_WAIT_TIME
             ):
                 player = BrawlhallaDataConverter().update_all_player_data(brawlhalla_id)
-            return JsonResponse(
-                {"player": BrawlhallaPlayerSchema().dump(player)}
-            )
+            return JsonResponse({"player": BrawlhallaPlayerSchema().dump(player)})
         except ObjectDoesNotExist:
             created_player = BrawlhallaDataConverter().update_all_player_data(
                 brawlhalla_id

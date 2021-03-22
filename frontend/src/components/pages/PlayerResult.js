@@ -1,138 +1,139 @@
-import React, {useEffect, useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Divider from '@material-ui/core/Divider';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+import Container from '@material-ui/core/Container'
+import Divider from '@material-ui/core/Divider'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Button from '@material-ui/core/Button'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
 
-import RankedCard1v1 from '../RankedCard1v1';
-import RankedCard2v2 from '../RankedCard2v2';
-import ContentHeader from '../ContentHeader';
-import PieChart from '../charts/PieChart';
-import PlayerOverviewCard from '../PlayerOverviewCard';
-import ClanCard from '../ClanCard';
-import {PlayerClient} from '../../api_agent';
+import RankedCard1v1 from '../RankedCard1v1'
+import RankedCard2v2 from '../RankedCard2v2'
+import ContentHeader from '../ContentHeader'
+import PieChart from '../charts/PieChart'
+import PlayerOverviewCard from '../PlayerOverviewCard'
+import ClanCard from '../ClanCard'
+import { PlayerClient } from '../../api_agent'
 
-import headerImg from '../assets/img/maps/Ship.png';
-import PlayerLegendAccordian from '../PlayerLegendAccordian';
+import headerImg from '../assets/img/maps/Ship.png'
+import PlayerLegendAccordian from '../PlayerLegendAccordian'
 
-
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+function Alert (props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 60,
+    marginTop: 60
   },
   textCenter: {
     marginTop: 100,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   mainContainer: {
-    alignItems: 'flex-start',
+    alignItems: 'flex-start'
   },
   leftContainer: {
-    marginTop: -200,
+    marginTop: -200
   },
   rightContainer: {
   },
   overviewItems: {
     padding: 10,
-    margin: 'auto',
+    margin: 'auto'
   },
   rankedContainer: {
     margin: 'auto',
     marginTop: 0,
-    padding: 10,
+    padding: 10
   },
   winRateChart: {
     padding: 10,
     width: 260,
     height: 'fit-content',
     margin: 'auto',
-    paddingBottom: 20,
+    paddingBottom: 20
   },
   clanCard: {
     width: 260,
     height: 'fit-content',
     margin: 'auto',
-    paddingBottom: 20,
+    paddingBottom: 20
   },
   refreshButton: {
     color: '#fff',
     position: 'absolute',
     [theme.breakpoints.down('lg')]: {
       top: 260,
-      left: 560,
+      left: 560
     },
     [theme.breakpoints.down('sm')]: {
       top: 70,
-      left: 100,
-    },
-  },
-}));
+      left: 100
+    }
+  }
+}))
 
-export default function PlayerResult(props) {
-  const classes = useStyles();
-  const [playerObj, setPlayerObj] = useState({});
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const [notificationOpen, setNotificationOpen] = useState(false);
-  const [refreshButtonContent, setRefreshButtonContent] = useState('Refresh Player');
-
+export default function PlayerResult (props) {
+  const classes = useStyles()
+  const [playerObj, setPlayerObj] = useState({})
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [failed, setFailed] = useState(false)
+  const [notificationOpen, setNotificationOpen] = useState(false)
+  const [refreshButtonContent, setRefreshButtonContent] = useState('Refresh Player')
 
   let page = (
     <div className={classes.textCenter}>
       <CircularProgress />
     </div>
-  );
+  )
 
   useEffect(() => {
     PlayerClient.get(props.match.params.id)
-        .then((res) => {
-          setPlayerObj(res.data.player);
-          setIsLoaded(true);
-        })
-        .catch((error) => {
-          setFailed(true);
-        });
-  }, [props.match.params.id]);
+      .then((res) => {
+        setPlayerObj(res.data.player)
+        setIsLoaded(true)
+      })
+      .catch((error) => {
+        setFailed(true)
+        console.log(error)
+      })
+  }, [props.match.params.id])
 
   const refreshUser = () => {
-    setRefreshButtonContent('Refreshing player...');
-    PlayerClient.get(props.match.params.id, {refresh: true})
-        .then((res) => {
-          setRefreshButtonContent('Refresh Player');
-          setNotificationOpen(true);
-          setPlayerObj(res.data.player);
-          setIsLoaded(true);
-        })
-        .catch((error) => {
-          setFailed(true);
-        });
-  };
+    setRefreshButtonContent('Refreshing player...')
+    PlayerClient.get(props.match.params.id, { refresh: true })
+      .then((res) => {
+        setRefreshButtonContent('Refresh Player')
+        setNotificationOpen(true)
+        setPlayerObj(res.data.player)
+        setIsLoaded(true)
+      })
+      .catch((error) => {
+        setFailed(true)
+        console.log(error)
+      })
+  }
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
-      return;
+      return
     }
 
-    setNotificationOpen(false);
-  };
+    setNotificationOpen(false)
+  }
 
   if (failed) {
     page = (
       <div className={classes.textCenter}>
         <Typography variant="h3">Player not found.</Typography>
       </div>
-    );
+    )
   } else if (isLoaded) {
     page = (<div className={classes.root}>
       <ContentHeader profile headerImg={headerImg} />
@@ -164,14 +165,17 @@ export default function PlayerResult(props) {
                 />
               </Paper>
             </Grid>
-            {playerObj.clan ? (<Grid item lg={12} className={classes.overviewItems}>
+            {playerObj.clan
+              ? (<Grid item lg={12} className={classes.overviewItems}>
               <ClanCard clanID={playerObj.clan.clan_id} clanName={playerObj.clan.clan_name} className={classes.clanCard} />
-            </Grid>) : null}
+            </Grid>)
+              : null}
           </Grid>
           <Grid item lg={9} container className={classes.rightContainer}>
             <Grid item sm={6} className={classes.rankedContainer}>
               {
-                                playerObj.ranked ? (<RankedCard1v1
+                                playerObj.ranked
+                                  ? (<RankedCard1v1
                                   type="1v1"
                                   playerName={playerObj.ranked.name}
                                   rankedImg={require(`../assets/img/Rankings/${playerObj.ranked.tier.split(' ')[0]}.png`)}
@@ -182,15 +186,17 @@ export default function PlayerResult(props) {
                                   games={playerObj.ranked.games}
                                   wins={playerObj.ranked.wins}
                                   losses={playerObj.ranked.games - playerObj.ranked.wins}
-                                />) : (<RankedCard1v1 error={true} />)
+                                />)
+                                  : (<RankedCard1v1 error={true} />)
               }
             </Grid>
             <Grid item sm={6} className={classes.rankedContainer}>
               {
-                                playerObj.ranked.ranked_teams ? (
+                                playerObj.ranked.ranked_teams
+                                  ? (
                                     <RankedCard2v2 teams={playerObj.ranked.ranked_teams} />
-                                ) :
-                                    (<RankedCard2v2 error={true} />)
+                                    )
+                                  : (<RankedCard2v2 error={true} />)
               }
             </Grid>
             <Grid item sm={12} className={classes.rankedContainer}>
@@ -199,7 +205,7 @@ export default function PlayerResult(props) {
           </Grid>
         </Grid>
       </Container>
-    </div>);
+    </div>)
   }
 
   return (
@@ -211,5 +217,13 @@ export default function PlayerResult(props) {
         </Alert>
       </Snackbar>
     </div>
-  );
+  )
+}
+
+PlayerResult.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number
+    })
+  })
 }

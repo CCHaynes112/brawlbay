@@ -1,102 +1,102 @@
-import {makeStyles} from '@material-ui/core/styles';
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import {useTheme} from '@material-ui/core/styles';
-import ToggleOffIcon from '@material-ui/icons/ToggleOff';
-import SettingsIcon from '@material-ui/icons/Settings';
+import PropTypes from 'prop-types'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
+import React from 'react'
+import AppBar from '@material-ui/core/AppBar'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Divider from '@material-ui/core/Divider'
+import Drawer from '@material-ui/core/Drawer'
+import Hidden from '@material-ui/core/Hidden'
+import IconButton from '@material-ui/core/IconButton'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import MenuIcon from '@material-ui/icons/Menu'
+import Toolbar from '@material-ui/core/Toolbar'
 
-import {Link as RouterLink} from 'react-router-dom';
+import ToggleOffIcon from '@material-ui/icons/ToggleOff'
+import SettingsIcon from '@material-ui/icons/Settings'
 
+import { Link as RouterLink } from 'react-router-dom'
 
-import PlayerSearchBar from './PlayerSearchBar';
+import PlayerSearchBar from './PlayerSearchBar'
 
-import logo from './assets/img/Logo-Black.png';
+import logo from './assets/img/Logo-Black.png'
 
-const drawerWidth = 240;
+const drawerWidth = 240
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: 'flex'
   },
   drawer: {
     [theme.breakpoints.up('md')]: {
       width: drawerWidth,
-      flexShrink: 0,
-    },
+      flexShrink: 0
+    }
   },
   appBar: {
     [theme.breakpoints.up('md')]: {
       width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
+      marginLeft: drawerWidth
+    }
   },
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   // necessary for content to be below app bar
   toolbar: theme.mixins.toolbar,
   flexEnd: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
 
   drawerPaper: {
-    width: drawerWidth,
+    width: drawerWidth
   },
   content: {
     flexGrow: 1,
     minHeight: '100vh',
-    width: '100vw',
+    width: '100vw'
     // padding: theme.spacing(3),
   },
   logoContainer: {
-    textAlign: 'center',
+    textAlign: 'center'
   },
 
   logo: {
-    'lineHeight': '80px',
+    lineHeight: '80px',
     '& img': {
       width: '95%',
       margin: 'auto',
       verticalAlign: 'middle',
-      display: 'inline-block',
-    },
+      display: 'inline-block'
+    }
   },
   drawerList: {
-    paddingLeft: theme.spacing(2),
+    paddingLeft: theme.spacing(2)
   },
 
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(4)
   },
 
   iconWhite: {
-    color: theme.palette.text.secondary,
-  },
-}));
+    color: theme.palette.text.secondary
+  }
+}))
 
-function Header(props) {
-  const {container} = props;
-  const classes = useStyles();
-  const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+function Header (props) {
+  const { container } = props
+  const classes = useStyles()
+  const theme = useTheme()
+  const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+    setMobileOpen(!mobileOpen)
+  }
 
   const drawer = (
     <div>
@@ -149,7 +149,7 @@ function Header(props) {
         </ListItem>
       </List>
     </div>
-  );
+  )
 
   return (
     <div className={classes.root}>
@@ -179,10 +179,10 @@ function Header(props) {
             open={mobileOpen}
             onClose={handleDrawerToggle}
             classes={{
-              paper: classes.drawerPaper,
+              paper: classes.drawerPaper
             }}
             ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
+              keepMounted: true // Better open performance on mobile.
             }}
           >
             {drawer}
@@ -191,7 +191,7 @@ function Header(props) {
         <Hidden smDown implementation="css">
           <Drawer
             classes={{
-              paper: classes.drawerPaper,
+              paper: classes.drawerPaper
             }}
             variant="permanent"
             open
@@ -204,7 +204,12 @@ function Header(props) {
         {props.children}
       </main>
     </div>
-  );
+  )
 }
 
-export default Header;
+Header.propTypes = {
+  children: PropTypes.element,
+  container: PropTypes.any
+}
+
+export default Header
