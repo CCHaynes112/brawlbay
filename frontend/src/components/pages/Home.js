@@ -36,9 +36,9 @@ export default function Home () {
 
   return (
     <div className={classes.root}>
-      <Container maxWidth="xl">
+      <Container maxWidth='xl'>
         <Paper className={classes.banner}>
-          <img src={bannerImg} alt="Banner" />
+          <img src={bannerImg} alt='Banner' />
           <div className={classes.searchBar}>
             <PlayerSearchBar />
           </div>

@@ -28,13 +28,13 @@ export default function Header () {
   return (
     <footer className={classes.root}>
       <div className={classes.content}>
-        <IconButton href="http://CurtisHaynes.net">
+        <IconButton href='http://CurtisHaynes.net'>
           <Typography className={classes.white}>Curtis Haynes</Typography>
         </IconButton>
-        <IconButton href="https://www.linkedin.com/in/curtis-haynes-b608b015b/" className={classes.white}>
+        <IconButton href='https://www.linkedin.com/in/curtis-haynes-b608b015b/' className={classes.white}>
           <LinkedIn />
         </IconButton>
-        <IconButton href="https://github.com/CCHaynes112" className={classes.white}>
+        <IconButton href='https://github.com/CCHaynes112' className={classes.white}>
           <GitHub />
         </IconButton>
       </div>

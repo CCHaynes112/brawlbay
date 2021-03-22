@@ -33,17 +33,17 @@ export default function ClanCard (props) {
   const classes = useStyles()
 
   return (
-    <Link component={RouterLink} to={'/clans/' + props.clanID} underline="none">
+    <Link component={RouterLink} to={'/clans/' + props.clanID} underline='none'>
       <Card elevation={2} className={classes.root}>
         <CardMedia
           className={classes.media}
           image={headerImg}
-          title="ClanImg"
+          title='ClanImg'
         />
         <CardContent className={classes.cardcontent}>
-          <Typography variant="h6">Clan</Typography>
+          <Typography variant='h6'>Clan</Typography>
           <Divider light />
-          <Typography variant="body1">{props.clanName}</Typography>
+          <Typography variant='body1'>{props.clanName}</Typography>
         </CardContent>
       </Card>
     </Link>

@@ -70,19 +70,19 @@ export default function ClanOverviewCard (props) {
       <CardMedia
         className={classes.media}
         image={headerImg}
-        title="ClandImg"
+        title='ClandImg'
       />
       <CardContent className={classes.cardcontent}>
-        <Typography variant="h6">Overview</Typography>
+        <Typography variant='h6'>Overview</Typography>
         <Divider light />
         <Grid container className={classes.content}>
           <Grid item lg={6} className={classes.rankFields}>
-            <Typography variant="body1">Formed</Typography>
-            <Typography variant="body1">XP</Typography>
+            <Typography variant='body1'>Formed</Typography>
+            <Typography variant='body1'>XP</Typography>
           </Grid>
           <Grid item lg={6} className={classes.rankValues}>
-            <Typography variant="body1">{props.formed}</Typography>
-            <Typography variant="body1">{props.xp}</Typography>
+            <Typography variant='body1'>{props.formed}</Typography>
+            <Typography variant='body1'>{props.xp}</Typography>
           </Grid>
         </Grid>
       </CardContent>

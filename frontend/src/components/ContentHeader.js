@@ -36,7 +36,7 @@ export default function ContentHeader (props) {
       <Grid container>
         <Grid item xs={12}>
           <Paper className={classes.title}>
-            <Typography variant="h2">{props.title}</Typography>
+            <Typography variant='h2'>{props.title}</Typography>
           </Paper>
         </Grid>
       </Grid>
@@ -46,7 +46,7 @@ export default function ContentHeader (props) {
   return (
     <div className={classes.root}>
       <div className={classes.imgConainer}>
-        <img src={props.headerImg} className={classes.headerImg} alt="Header" />
+        <img src={props.headerImg} className={classes.headerImg} alt='Header' />
       </div>
       {headerContent}
     </div>

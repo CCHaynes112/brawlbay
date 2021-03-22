@@ -53,7 +53,7 @@ export default function PieChart (props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="subtitle1" className={classes.heading}>{props.title}</Typography>
+      <Typography variant='subtitle1' className={classes.heading}>{props.title}</Typography>
       <Pie data={data} options={options} />
     </div>
   )

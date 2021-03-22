@@ -35,22 +35,22 @@ export default function App () {
         <CssBaseline />
         <Header>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/players/:id" component={PlayerResult} />
-            <Route path="/clans/:id" component={ClanResult} />
-            <Route path="/items" />
-            <Route path="/legends" />
-            <Route path="/legends/:id" />
-            <Route path="/1v1leaderboard" component={Ranked1v1Leaderboard} />
-            <Route path="/2v2leaderboard" component={Ranked2v2Leaderboard} />
-            <Route path="/clanleaderboard" />
-            <Route path="/ratings" />
-            <Route path="/streams" />
-            <Route path="/tournaments" />
-            <Route path="/videos" />
-            <Route path="/gifs" />
-            <Route path="/contact" component={Contact} />
-            <Route page="/404" component={PageNotFound} />
+            <Route exact path='/' component={Home} />
+            <Route path='/players/:id' component={PlayerResult} />
+            <Route path='/clans/:id' component={ClanResult} />
+            <Route path='/items' />
+            <Route path='/legends' />
+            <Route path='/legends/:id' />
+            <Route path='/1v1leaderboard' component={Ranked1v1Leaderboard} />
+            <Route path='/2v2leaderboard' component={Ranked2v2Leaderboard} />
+            <Route path='/clanleaderboard' />
+            <Route path='/ratings' />
+            <Route path='/streams' />
+            <Route path='/tournaments' />
+            <Route path='/videos' />
+            <Route path='/gifs' />
+            <Route path='/contact' component={Contact} />
+            <Route page='/404' component={PageNotFound} />
           </Switch>
         </Header>
         <Footer />

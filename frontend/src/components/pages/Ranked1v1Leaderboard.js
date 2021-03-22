@@ -22,10 +22,10 @@ export default function Ranked1v1Leaderboard () {
 
   return (
     <div className={classes.root}>
-      <ContentHeader title="Ranked 1v1 Leaderboards" headerImg={headerImg} />
-      <Container className={classes.container} maxWidth="xl">
+      <ContentHeader title='Ranked 1v1 Leaderboards' headerImg={headerImg} />
+      <Container className={classes.container} maxWidth='xl'>
         <LeaderboardTable />
       </Container>
-    </div >
+    </div>
   )
 }

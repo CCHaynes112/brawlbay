@@ -54,7 +54,7 @@ export default function DoughnutChart (props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="subtitle1" className={classes.heading}>{props.title}</Typography>
+      <Typography variant='subtitle1' className={classes.heading}>{props.title}</Typography>
       <Doughnut data={data} options={options} />
     </div>
   )

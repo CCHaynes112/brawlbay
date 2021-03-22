@@ -60,7 +60,7 @@ export default function BarChart (props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant="subtitle1" className={classes.heading}>{props.title}</Typography>
+      <Typography variant='subtitle1' className={classes.heading}>{props.title}</Typography>
       <Bar data={data} options={options} />
     </div>
   )

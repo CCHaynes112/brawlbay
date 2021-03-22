@@ -23,7 +23,7 @@ import headerImg from '../assets/img/maps/Ship.png'
 import PlayerLegendAccordian from '../PlayerLegendAccordian'
 
 function Alert (props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />
+  return <MuiAlert elevation={6} variant='filled' {...props} />
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -131,89 +131,91 @@ export default function PlayerResult (props) {
   if (failed) {
     page = (
       <div className={classes.textCenter}>
-        <Typography variant="h3">Player not found.</Typography>
+        <Typography variant='h3'>Player not found.</Typography>
       </div>
     )
   } else if (isLoaded) {
-    page = (<div className={classes.root}>
-      <ContentHeader profile headerImg={headerImg} />
-      <Container maxWidth="xl">
-        <Grid container className={classes.mainContainer}>
-          <Grid item lg={3} container className={classes.leftContainer}>
-            <Grid item lg={12} className={classes.overviewItems}>
-              <PlayerOverviewCard
-                playerName={playerObj.name}
-                id={playerObj.brawlhalla_id}
-                legendImg={require(`../assets/img/legend_art/${playerObj.best_legend}.png`)}
-                level={playerObj.level}
-                xp={playerObj.xp}
-                rating={playerObj.ranked.rating}
-                region={playerObj.ranked.region}
-                games={playerObj.games}
-                wins={playerObj.wins}
-                losses={playerObj.games - playerObj.wins}
-              />
-              <Button onClick={refreshUser} className={classes.refreshButton} variant="contained" color="secondary">{refreshButtonContent}</Button>
-            </Grid>
-            <Grid item lg={12} className={classes.overviewItems}>
-              <Paper className={classes.winRateChart}>
-                <Typography variant="h6">Total Win/Loss</Typography>
-                <Divider />
-                <PieChart
-                  labels={['Wins', 'Losses']}
-                  values={[playerObj.wins, playerObj.games - playerObj.wins]}
+    page = (
+      <div className={classes.root}>
+        <ContentHeader profile headerImg={headerImg} />
+        <Container maxWidth='xl'>
+          <Grid container className={classes.mainContainer}>
+            <Grid item lg={3} container className={classes.leftContainer}>
+              <Grid item lg={12} className={classes.overviewItems}>
+                <PlayerOverviewCard
+                  playerName={playerObj.name}
+                  id={playerObj.brawlhalla_id}
+                  legendImg={require(`../assets/img/legend_art/${playerObj.best_legend}.png`)}
+                  level={playerObj.level}
+                  xp={playerObj.xp}
+                  rating={playerObj.ranked.rating}
+                  region={playerObj.ranked.region}
+                  games={playerObj.games}
+                  wins={playerObj.wins}
+                  losses={playerObj.games - playerObj.wins}
                 />
-              </Paper>
+                <Button onClick={refreshUser} className={classes.refreshButton} variant='contained' color='secondary'>{refreshButtonContent}</Button>
+              </Grid>
+              <Grid item lg={12} className={classes.overviewItems}>
+                <Paper className={classes.winRateChart}>
+                  <Typography variant='h6'>Total Win/Loss</Typography>
+                  <Divider />
+                  <PieChart
+                    labels={['Wins', 'Losses']}
+                    values={[playerObj.wins, playerObj.games - playerObj.wins]}
+                  />
+                </Paper>
+              </Grid>
+              {playerObj.clan
+                ? (<Grid item lg={12} className={classes.overviewItems}>
+                  <ClanCard clanID={playerObj.clan.clan_id} clanName={playerObj.clan.clan_name} className={classes.clanCard} />
+                   </Grid>)
+                : null}
             </Grid>
-            {playerObj.clan
-              ? (<Grid item lg={12} className={classes.overviewItems}>
-              <ClanCard clanID={playerObj.clan.clan_id} clanName={playerObj.clan.clan_name} className={classes.clanCard} />
-            </Grid>)
-              : null}
-          </Grid>
-          <Grid item lg={9} container className={classes.rightContainer}>
-            <Grid item sm={6} className={classes.rankedContainer}>
-              {
+            <Grid item lg={9} container className={classes.rightContainer}>
+              <Grid item sm={6} className={classes.rankedContainer}>
+                {
                                 playerObj.ranked
                                   ? (<RankedCard1v1
-                                  type="1v1"
-                                  playerName={playerObj.ranked.name}
-                                  rankedImg={require(`../assets/img/Rankings/${playerObj.ranked.tier.split(' ')[0]}.png`)}
-                                  region={playerObj.ranked.region}
-                                  rank={playerObj.ranked.tier}
-                                  peakRating={playerObj.ranked.peak_rating}
-                                  currentRating={playerObj.ranked.rating}
-                                  games={playerObj.ranked.games}
-                                  wins={playerObj.ranked.wins}
-                                  losses={playerObj.ranked.games - playerObj.ranked.wins}
-                                />)
-                                  : (<RankedCard1v1 error={true} />)
+                                      type='1v1'
+                                      playerName={playerObj.ranked.name}
+                                      rankedImg={require(`../assets/img/Rankings/${playerObj.ranked.tier.split(' ')[0]}.png`)}
+                                      region={playerObj.ranked.region}
+                                      rank={playerObj.ranked.tier}
+                                      peakRating={playerObj.ranked.peak_rating}
+                                      currentRating={playerObj.ranked.rating}
+                                      games={playerObj.ranked.games}
+                                      wins={playerObj.ranked.wins}
+                                      losses={playerObj.ranked.games - playerObj.ranked.wins}
+                                     />)
+                                  : (<RankedCard1v1 error />)
               }
-            </Grid>
-            <Grid item sm={6} className={classes.rankedContainer}>
-              {
+              </Grid>
+              <Grid item sm={6} className={classes.rankedContainer}>
+                {
                                 playerObj.ranked.ranked_teams
                                   ? (
                                     <RankedCard2v2 teams={playerObj.ranked.ranked_teams} />
                                     )
-                                  : (<RankedCard2v2 error={true} />)
+                                  : (<RankedCard2v2 error />)
               }
-            </Grid>
-            <Grid item sm={12} className={classes.rankedContainer}>
-              <PlayerLegendAccordian legends={playerObj.legends} />
+              </Grid>
+              <Grid item sm={12} className={classes.rankedContainer}>
+                <PlayerLegendAccordian legends={playerObj.legends} />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Container>
-    </div>)
+        </Container>
+      </div>
+    )
   }
 
   return (
     <div>
       {page}
       <Snackbar open={notificationOpen} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-                    Player Updated
+        <Alert onClose={handleClose} severity='success'>
+          Player Updated
         </Alert>
       </Snackbar>
     </div>

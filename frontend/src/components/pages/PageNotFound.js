@@ -14,7 +14,7 @@ export default function LeaderboardTable2v2 () {
 
   return (
     <div className={classes.root}>
-      <Typography variant="h3">Oops, page not found.</Typography>
+      <Typography variant='h3'>Oops, page not found.</Typography>
     </div>
   )
 }

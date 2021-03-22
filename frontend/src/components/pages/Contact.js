@@ -87,15 +87,15 @@ export default function Contact () {
 
   return (
     <div className={classes.root}>
-      <ContentHeader title="Contact" headerImg={headerImg} />
-      <Container maxWidth="md">
+      <ContentHeader title='Contact' headerImg={headerImg} />
+      <Container maxWidth='md'>
         <Paper className={classes.paper}>
-          <Typography variant="body1">
-                        Please feel free to shoot me a message if you have any questions or comments!
+          <Typography variant='body1'>
+            Please feel free to shoot me a message if you have any questions or comments!
           </Typography>
           <Grid container className={classes.gridContainer}>
             <Grid item sm={3}>
-              <img className={classes.img} src={tinRank} alt="Tin" />
+              <img className={classes.img} src={tinRank} alt='Tin' />
             </Grid>
             <Grid item sm={9}>
               <form noValidate className={classes.form}>
@@ -103,7 +103,7 @@ export default function Contact () {
                   InputLabelProps={{
                     className: classes.textField
                   }}
-                  label="Email"
+                  label='Email'
                   required
                   value={email}
                   onChange={handleEmail}
@@ -112,7 +112,7 @@ export default function Contact () {
                   InputLabelProps={{
                     className: classes.textField
                   }}
-                  label="Subject"
+                  label='Subject'
                   required
                   value={subject}
                   onChange={handleSubject}
@@ -123,17 +123,17 @@ export default function Contact () {
                   InputLabelProps={{
                     className: classes.textField
                   }}
-                  label="Message"
+                  label='Message'
                   required
                   value={message}
                   onChange={handleMessage}
                 />
-                <Button className={classes.button} variant="contained" color="secondary" onClick={sendEmail}>Submit</Button>
+                <Button className={classes.button} variant='contained' color='secondary' onClick={sendEmail}>Submit</Button>
               </form>
             </Grid>
           </Grid>
         </Paper>
       </Container>
-    </div >
+    </div>
   )
 }

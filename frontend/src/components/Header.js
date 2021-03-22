@@ -101,12 +101,12 @@ function Header (props) {
   const drawer = (
     <div>
       <div className={classes.logoContainer}>
-        <RouterLink to="/" className={classes.logo}><img src={logo} alt="Logo" /></RouterLink>
+        <RouterLink to='/' className={classes.logo}><img src={logo} alt='Logo' /></RouterLink>
       </div>
       <Divider />
       <List className={classes.drawerList}>
-        <ListItem button component={RouterLink} to="/">
-          <ListItemText primary="Home" />
+        <ListItem button component={RouterLink} to='/'>
+          <ListItemText primary='Home' />
         </ListItem>
         {/* <ListItem button component={RouterLink} to="/items">
                     <ListItemText primary="Items" />
@@ -115,13 +115,13 @@ function Header (props) {
                     <ListItemText primary="Legends" />
                 </ListItem> */}
         <ListItem>
-          <ListItemText primary="Rankings" />
+          <ListItemText primary='Rankings' />
         </ListItem>
-        <ListItem button className={classes.nested} component={RouterLink} to="/1v1leaderboard">
-          <ListItemText primary="1v1 Leaderboard" />
+        <ListItem button className={classes.nested} component={RouterLink} to='/1v1leaderboard'>
+          <ListItemText primary='1v1 Leaderboard' />
         </ListItem>
-        <ListItem button className={classes.nested} component={RouterLink} to="/2v2leaderboard">
-          <ListItemText primary="2v2 Leaderboard" />
+        <ListItem button className={classes.nested} component={RouterLink} to='/2v2leaderboard'>
+          <ListItemText primary='2v2 Leaderboard' />
         </ListItem>
         {/* <ListItem button className={classes.nested} component={RouterLink} to="/clanleaderboard">
                     <ListItemText primary="Clan Leaderboard" />
@@ -144,8 +144,8 @@ function Header (props) {
                 <ListItem button className={classes.nested} component={RouterLink} to="/gifs">
                     <ListItemText primary="Gifs" />
                 </ListItem> */}
-        <ListItem button component={RouterLink} to="/contact">
-          <ListItemText primary="Contact" />
+        <ListItem button component={RouterLink} to='/contact'>
+          <ListItemText primary='Contact' />
         </ListItem>
       </List>
     </div>
@@ -154,27 +154,27 @@ function Header (props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position='fixed' className={classes.appBar}>
         <Toolbar className={classes.flexEnd}>
           <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
+            color='inherit'
+            aria-label='open drawer'
+            edge='start'
             onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
             <MenuIcon />
           </IconButton>
           <PlayerSearchBar filled />
-          <IconButton className={classes.iconWhite}><ToggleOffIcon fontSize="large" /></IconButton>
+          <IconButton className={classes.iconWhite}><ToggleOffIcon fontSize='large' /></IconButton>
           <IconButton className={classes.iconWhite}><SettingsIcon /></IconButton>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer}>
-        <Hidden mdUp implementation="css">
+        <Hidden mdUp implementation='css'>
           <Drawer
             container={container}
-            variant="temporary"
+            variant='temporary'
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
             onClose={handleDrawerToggle}
@@ -188,12 +188,12 @@ function Header (props) {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden smDown implementation="css">
+        <Hidden smDown implementation='css'>
           <Drawer
             classes={{
               paper: classes.drawerPaper
             }}
-            variant="permanent"
+            variant='permanent'
             open
           >
             {drawer}

@@ -30,7 +30,7 @@ export default function LeaderboardTableClan (props) {
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table}>
-        <TableHead className={classes.tableHeader} >
+        <TableHead className={classes.tableHeader}>
           <TableRow>
             <TableCell className={classes.tableHeaderText}>Rank</TableCell>
             <TableCell className={classes.tableHeaderText}>Name</TableCell>

@@ -47,57 +47,57 @@ export default function PlayerLegendAccordian (props) {
               <Grid container className={classes.subContainer}>
                 <Grid item sm={3} className={classes.heading}>
                   <Avatar src={require(`./assets/img/legend_art/${legend.legend_id}.png`)} />
-                  <Typography variant="h6" className={classes.headingTitle}>{legend.legend_name}</Typography>
+                  <Typography variant='h6' className={classes.headingTitle}>{legend.legend_name}</Typography>
                 </Grid>
                 <Grid item sm={3}>
-                  <Typography variant="body1">{'Level: ' + legend.level}</Typography>
+                  <Typography variant='body1'>{'Level: ' + legend.level}</Typography>
                 </Grid>
                 <Grid item sm={3}>
-                  <Typography variant="body1">
+                  <Typography variant='body1'>
                     {'Win Rate: ' + Math.round((legend.wins / legend.games) * 100) + '%'}
                   </Typography>
                 </Grid>
                 <Grid item sm={3}>
-                  <Typography variant="body1">{'Games: ' + legend.games}</Typography>
+                  <Typography variant='body1'>{'Games: ' + legend.games}</Typography>
                 </Grid>
               </Grid>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
               <Grid container className={classes.chartContainer}>
                 <Grid item lg={2}>
-                  <Typography variant="body1">Match Time: {legend.match_time}</Typography>
-                  <Typography variant="body1">Games: {legend.games}</Typography>
-                  <Typography variant="body1">Wins: {legend.wins}</Typography>
-                  <Typography variant="body1">Losses: {legend.games - legend.wins}</Typography>
-                  <Typography variant="body1">Kills: {legend.kos}</Typography>
-                  <Typography variant="body1">Deaths: {legend.falls}</Typography>
-                  <Typography variant="body1">Suicides: {legend.suicides}</Typography>
-                  <Button className={classes.button} variant="contained" color="secondary">View Legend</Button>
+                  <Typography variant='body1'>Match Time: {legend.match_time}</Typography>
+                  <Typography variant='body1'>Games: {legend.games}</Typography>
+                  <Typography variant='body1'>Wins: {legend.wins}</Typography>
+                  <Typography variant='body1'>Losses: {legend.games - legend.wins}</Typography>
+                  <Typography variant='body1'>Kills: {legend.kos}</Typography>
+                  <Typography variant='body1'>Deaths: {legend.falls}</Typography>
+                  <Typography variant='body1'>Suicides: {legend.suicides}</Typography>
+                  <Button className={classes.button} variant='contained' color='secondary'>View Legend</Button>
                 </Grid>
                 <Grid item lg={2}>
                   <DoughnutChart
-                    title="Win/Loss"
+                    title='Win/Loss'
                     labels={['Wins', 'Losses']}
                     values={[legend.wins, legend.games - legend.wins]}
                   />
                 </Grid>
                 <Grid item lg={2}>
                   <BarChart
-                    title="Damage Breakdown"
+                    title='Damage Breakdown'
                     labels={['Damage Given', 'Damage Taken']}
                     values={[legend.damage_dealt, legend.damage_taken]}
                   />
                 </Grid>
                 <Grid item lg={2}>
                   <PieChart
-                    title="Damage Breakdown"
+                    title='Damage Breakdown'
                     labels={['Primary', 'Secondary', 'Unarmed', 'Thrown', 'Gadget']}
                     values={[legend.damage_weapon_one, legend.damage_weapon_two, legend.damage_unarmed, legend.damage_thrown, legend.damage_gadgets]}
                   />
                 </Grid>
                 <Grid item lg={2}>
                   <PieChart
-                    title="K/D/S"
+                    title='K/D/S'
                     labels={['Kills', 'Deaths', 'Suicides']}
                     values={[legend.kos, legend.falls, legend.suicides]}
                   />

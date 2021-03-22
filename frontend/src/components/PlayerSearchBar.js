@@ -91,7 +91,7 @@ export default function PlayerSearchBar (props) {
           <SearchIcon />
         </div>
         <InputBase
-          placeholder="Search…"
+          placeholder='Search…'
           classes={{
             root: classes.inputRoot,
             input: classes.inputInput
@@ -109,17 +109,18 @@ export default function PlayerSearchBar (props) {
     searchBarElement = (
       <FormControl className={classes.searchBar}>
         <InputLabel className={classes.searchLabel}>Search...</InputLabel>
-        <Input onKeyDown={(e) => {
-          if (e.key === 'Enter' && playerName.length > 0) {
-            handleClickOpen()
-          }
-        }}
-        value={playerName} onChange={handleTextChange} endAdornment={
-          <InputAdornment position="end">
-            <IconButton onClick={handleClickOpen}>
-              <SearchIcon />
-            </IconButton>
-          </InputAdornment>
+        <Input
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && playerName.length > 0) {
+              handleClickOpen()
+            }
+          }}
+          value={playerName} onChange={handleTextChange} endAdornment={
+            <InputAdornment position='end'>
+              <IconButton onClick={handleClickOpen}>
+                <SearchIcon />
+              </IconButton>
+            </InputAdornment>
         }
         />
       </FormControl>

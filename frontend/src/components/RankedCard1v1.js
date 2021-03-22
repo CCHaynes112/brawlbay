@@ -56,44 +56,44 @@ export default function RankedCard2v2 (props) {
                 props.error
                   ? (
                     <Paper className={classes.no1v1}>
-                      <Typography variant="h6">Oops, no 1v1 data...</Typography>
+                      <Typography variant='h6'>Oops, no 1v1 data...</Typography>
                     </Paper>
                     )
                   : (
-                        <Paper className={classes.paper}>
-                          <Grid container className={classes.content}>
-                            <Grid item>
-                              <Typography variant="h6">{props.playerName}</Typography>
-                            </Grid>
-                            <Grid item>
-                              <Typography variant="subtitle1">Rank {props.type}</Typography>
-                            </Grid>
-                          </Grid>
-                          <Divider light />
-                          <Grid container className={classes.content}>
-                            <Grid className={classes.imgContainer} item lg={4}>
-                              <img src={props.rankedImg} alt="Rank" className={classes.rankImg} />
-                            </Grid>
-                            <Grid item lg={5} className={classes.rankFields}>
-                              <Typography variant="body1">Region</Typography>
-                              <Typography variant="body1">Rank</Typography>
-                              <Typography variant="body1">Peak Rating</Typography>
-                              <Typography variant="body1">Current Rating</Typography>
-                              <Typography variant="body1">Games</Typography>
-                              <Typography variant="body1">Wins</Typography>
-                              <Typography variant="body1">Losses</Typography>
-                            </Grid>
-                            <Grid item lg={3} className={classes.rankValues}>
-                              <Typography variant="body1">{props.region}</Typography>
-                              <Typography variant="body1">{props.rank}</Typography>
-                              <Typography variant="body1">{props.peakRating}</Typography>
-                              <Typography variant="body1">{props.currentRating}</Typography>
-                              <Typography variant="body1">{props.games}</Typography>
-                              <Typography variant="body1">{props.wins}</Typography>
-                              <Typography variant="body1">{props.losses}</Typography>
-                            </Grid>
-                          </Grid>
-                        </Paper>
+                    <Paper className={classes.paper}>
+                      <Grid container className={classes.content}>
+                        <Grid item>
+                          <Typography variant='h6'>{props.playerName}</Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography variant='subtitle1'>Rank {props.type}</Typography>
+                        </Grid>
+                      </Grid>
+                      <Divider light />
+                      <Grid container className={classes.content}>
+                        <Grid className={classes.imgContainer} item lg={4}>
+                          <img src={props.rankedImg} alt='Rank' className={classes.rankImg} />
+                        </Grid>
+                        <Grid item lg={5} className={classes.rankFields}>
+                          <Typography variant='body1'>Region</Typography>
+                          <Typography variant='body1'>Rank</Typography>
+                          <Typography variant='body1'>Peak Rating</Typography>
+                          <Typography variant='body1'>Current Rating</Typography>
+                          <Typography variant='body1'>Games</Typography>
+                          <Typography variant='body1'>Wins</Typography>
+                          <Typography variant='body1'>Losses</Typography>
+                        </Grid>
+                        <Grid item lg={3} className={classes.rankValues}>
+                          <Typography variant='body1'>{props.region}</Typography>
+                          <Typography variant='body1'>{props.rank}</Typography>
+                          <Typography variant='body1'>{props.peakRating}</Typography>
+                          <Typography variant='body1'>{props.currentRating}</Typography>
+                          <Typography variant='body1'>{props.games}</Typography>
+                          <Typography variant='body1'>{props.wins}</Typography>
+                          <Typography variant='body1'>{props.losses}</Typography>
+                        </Grid>
+                      </Grid>
+                    </Paper>
                     )
       }
 

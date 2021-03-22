@@ -47,7 +47,7 @@ export default function LeaderboardTable1v1 () {
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table}>
-        <TableHead className={classes.tableHeader} >
+        <TableHead className={classes.tableHeader}>
           <TableRow>
             <TableCell className={classes.tableHeaderText}>Rank</TableCell>
             <TableCell className={classes.tableHeaderText}>Name</TableCell>
@@ -78,20 +78,29 @@ export default function LeaderboardTable1v1 () {
         {
                     pageNumber > 1
                       ? (
-                            <span>
-                              <Button onClick={() => {
-                                setPageNumber(1)
-                              }} color="primary">Top</Button>
-                              <Button onClick={() => {
-                                setPageNumber(pageNumber - 1)
-                              }} color="primary">Previous</Button>
-                            </span>
+                        <span>
+                          <Button
+                            onClick={() => {
+                              setPageNumber(1)
+                            }} color='primary'
+                          >Top
+                          </Button>
+                          <Button
+                            onClick={() => {
+                              setPageNumber(pageNumber - 1)
+                            }} color='primary'
+                          >Previous
+                          </Button>
+                        </span>
                         )
                       : null
         }
-        <Button onClick={() => {
-          setPageNumber(pageNumber + 1)
-        }} color="primary">Next</Button>
+        <Button
+          onClick={() => {
+            setPageNumber(pageNumber + 1)
+          }} color='primary'
+        >Next
+        </Button>
       </div>
     </TableContainer>
   )

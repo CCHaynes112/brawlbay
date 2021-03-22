@@ -64,8 +64,8 @@ export default function TopPlayers () {
 
   return (
     <div className={classes.root}>
-      <Grid container justify="center">
-        <img src={topCountImg} className={classes.topPlayers} alt="TopPlayers" />
+      <Grid container justify='center'>
+        <img src={topCountImg} className={classes.topPlayers} alt='TopPlayers' />
       </Grid>
 
       <Grid container spacing={1} className={classes.cardContainer}>

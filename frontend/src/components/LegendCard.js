@@ -30,16 +30,16 @@ export default function LegendCard (props) {
   const classes = useStyles()
 
   return (
-    <Link component={RouterLink} to={'/legends/' + props.legendID} underline="none">
+    <Link component={RouterLink} to={'/legends/' + props.legendID} underline='none'>
       <Card elevation={2} className={classes.card}>
         <CardMedia
           className={classes.media}
           image={props.legendImg}
-          title="LegendImg"
+          title='LegendImg'
         />
         <CardContent className={classes.cardcontent}>
-          <Typography gutterBottom variant="h6">{props.name}</Typography>
-          <Typography gutterBottom variant="caption">{props.title}</Typography>
+          <Typography gutterBottom variant='h6'>{props.name}</Typography>
+          <Typography gutterBottom variant='caption'>{props.title}</Typography>
         </CardContent>
       </Card>
     </Link>

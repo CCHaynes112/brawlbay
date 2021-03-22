@@ -90,21 +90,22 @@ export default function ClanResult (props) {
   }, [props.match.params.id])
 
   if (isLoaded) {
-    page = (<div className={classes.root}>
-      <ContentHeader profile headerImg={headerImg} />
-      <Container maxWidth="xl" className={classes.mainContainer}>
-        <Grid container>
-          <Grid item lg={2} container className={classes.overviewContainer}>
-            <Grid item lg={12} className={classes.overviewItems}>
-              <ClanOverviewCard
-                clanName={clanObj.clan_name}
-                formed={clanObj.clan_create_date}
-                xp={clanObj.clan_xp}
-              />
+    page = (
+      <div className={classes.root}>
+        <ContentHeader profile headerImg={headerImg} />
+        <Container maxWidth='xl' className={classes.mainContainer}>
+          <Grid container>
+            <Grid item lg={2} container className={classes.overviewContainer}>
+              <Grid item lg={12} className={classes.overviewItems}>
+                <ClanOverviewCard
+                  clanName={clanObj.clan_name}
+                  formed={clanObj.clan_create_date}
+                  xp={clanObj.clan_xp}
+                />
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid item lg={10} container className={classes.topPlayersContainer}>
-            {
+            <Grid item lg={10} container className={classes.topPlayersContainer}>
+              {
               top4Players.map((player, key) =>
                 <Grid item key={key}>
                   <PlayerCard
@@ -117,13 +118,14 @@ export default function ClanResult (props) {
                 </Grid>
               )
             }
+            </Grid>
+            <Grid item lg={12} container className={classes.topPlayersContainer}>
+              <LeaderboardTableClan clan={clanObj.clan} className={classes.clanMembers} />
+            </Grid>
           </Grid>
-          <Grid item lg={12} container className={classes.topPlayersContainer}>
-            <LeaderboardTableClan clan={clanObj.clan} className={classes.clanMembers} />
-          </Grid>
-        </Grid>
-      </Container>
-    </div>)
+        </Container>
+      </div>
+    )
   }
 
   return (

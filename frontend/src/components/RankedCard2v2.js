@@ -26,18 +26,18 @@ export default function RankedCard2v2 (props) {
   const classes = useStyles()
 
   return (
-    <Fragment>
+    <>
       {
                 props.error
                   ? (<Paper className={classes.no2v2}>
-                  <Typography variant="h6">Oops, no 2v2 data...</Typography>
-                </Paper>)
+                    <Typography variant='h6'>Oops, no 2v2 data...</Typography>
+                     </Paper>)
                   : <Paper className={classes.paper}>
-                      {
+                    {
                         props.teams.map((team, key) => (
                           <RankedCard1v1
                             key={key}
-                            type="2v2"
+                            type='2v2'
                             playerName={team.team_name}
                             rankedImg={require(`./assets/img/Rankings/${team.tier.split(' ')[0]}.png`)}
                             region={team.region}
@@ -50,9 +50,9 @@ export default function RankedCard2v2 (props) {
                           />
                         ))
                       }
-                    </Paper>
+                  </Paper>
       }
-    </Fragment>
+    </>
   )
 }
 

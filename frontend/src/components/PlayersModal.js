@@ -75,20 +75,21 @@ export default function PlayersModal (props) {
             <div key={key}>
               <ListItem button onClick={() => handleListItemClick(player)}>
                 <ListItemIcon>
-                  <AccountCircleIcon fontSize="large" />
+                  <AccountCircleIcon fontSize='large' />
                 </ListItemIcon>
                 <ListItemText primary={player.name} />
                 <ListItemText primary={player.region} style={{ textAlign: 'right' }} />
               </ListItem>
               <Divider />
             </div>
-          ))}
+          ))
+}
       </List>
     )
   }
 
   return (
-    <Dialog onEnter={handleEnter} onClose={handleClose} open={open} fullWidth={true} maxWidth="sm" className={classes.modal}>
+    <Dialog onEnter={handleEnter} onClose={handleClose} open={open} fullWidth maxWidth='sm' className={classes.modal}>
       <DialogTitle>Players matching &#39;{playerToSearch}&#39;</DialogTitle>
       {playersListElement}
     </Dialog>

@@ -27,21 +27,21 @@ export default function PlayerCard (props) {
   const classes = useStyles()
 
   return (
-    <Link component={RouterLink} to={'/players/' + props.playerID} underline="none">
+    <Link component={RouterLink} to={'/players/' + props.playerID} underline='none'>
       <Card elevation={2} className={classes.card}>
         <CardActionArea>
           {props.legendImg != null &&
-                        <CardMedia
-                          className={classes.media}
-                          image={props.legendImg}
-                          title="LegendImg"
-                        />}
+            <CardMedia
+              className={classes.media}
+              image={props.legendImg}
+              title='LegendImg'
+            />}
 
           <CardContent>
-            <Typography noWrap={true} gutterBottom variant="h5">{props.playerName}</Typography>
-            <Typography variant="body2">Rating: {props.playerRating}</Typography>
-            <Typography variant="body2">{props.playerRegion}</Typography>
-            <Typography variant="body2">Wins: {props.playerWins}</Typography>
+            <Typography noWrap gutterBottom variant='h5'>{props.playerName}</Typography>
+            <Typography variant='body2'>Rating: {props.playerRating}</Typography>
+            <Typography variant='body2'>{props.playerRegion}</Typography>
+            <Typography variant='body2'>Wins: {props.playerWins}</Typography>
           </CardContent>
         </CardActionArea>
       </Card>
