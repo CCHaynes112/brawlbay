@@ -103,7 +103,10 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=64)),
                 ("xp", models.IntegerField()),
                 ("level", models.IntegerField()),
-                ("xp_percent", models.DecimalField(decimal_places=2, max_digits=5)),
+                (
+                    "xp_percent",
+                    models.DecimalField(decimal_places=2, max_digits=5),
+                ),
                 ("games", models.IntegerField()),
                 ("wins", models.IntegerField()),
                 ("damage_bomb", models.IntegerField()),
@@ -200,7 +203,10 @@ class Migration(migrations.Migration):
                 ("time_held_weapon_two", models.IntegerField()),
                 ("xp", models.IntegerField()),
                 ("level", models.IntegerField()),
-                ("xp_percent", models.DecimalField(decimal_places=2, max_digits=5)),
+                (
+                    "xp_percent",
+                    models.DecimalField(decimal_places=2, max_digits=5),
+                ),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
                 (

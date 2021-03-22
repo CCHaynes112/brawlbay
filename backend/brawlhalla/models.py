@@ -122,7 +122,9 @@ class BrawlhallaClanPlayer(models.Model):
 
 class BrawlhallaPlayerRankedLegend(models.Model):
     ranked = models.ForeignKey(
-        BrawlhallaPlayerRanked, on_delete=models.CASCADE, related_name="legends"
+        BrawlhallaPlayerRanked,
+        on_delete=models.CASCADE,
+        related_name="legends",
     )
     legend = models.ForeignKey(
         BrawlhallaLegend, on_delete=models.CASCADE, related_name="ranked"
@@ -146,7 +148,9 @@ class BrawlhallaPlayerLegend(models.Model):
         BrawlhallaPlayer, on_delete=models.CASCADE, related_name="legends"
     )
     legend = models.ForeignKey(
-        BrawlhallaLegend, on_delete=models.CASCADE, related_name="played_legends"
+        BrawlhallaLegend,
+        on_delete=models.CASCADE,
+        related_name="played_legends",
     )
     damage_dealt = models.IntegerField()
     damage_taken = models.IntegerField()

@@ -1,7 +1,6 @@
 from django.views.generic import View
 from .models import BrawlhallaPlayer
 from .schemas import BrawlhallaPlayerSchema
-from django.http import JsonResponse
 from .utils.BrawlhallaClient import BrawlhallaClient, BrawlhallaDataConverter
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
@@ -10,7 +9,7 @@ import re
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.core.mail import BadHeaderError, send_mail
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, JsonResponse
 
 
 class BrawlhallaPlayerView(View):
@@ -102,7 +101,10 @@ def send_email(request):
     if subject and message and email:
         try:
             send_mail(
-                subject, message, f"Brawlbay <{email}>", ["CCHaynes1122@gmail.com"]
+                subject,
+                message,
+                f"Brawlbay <{email}>",
+                ["CCHaynes1122@gmail.com"],
             )
         except BadHeaderError:
             return HttpResponse("Invalid header found.")
