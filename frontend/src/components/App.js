@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
   Router,
   Switch,
   Route,
-  //Link
-} from "react-router-dom";
+  // Link
+} from 'react-router-dom';
 import ReactGA from 'react-ga';
-import { createBrowserHistory } from 'history';
+import {createBrowserHistory} from 'history';
 
-import { ThemeProvider } from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import theme from '../theme';
@@ -24,8 +24,8 @@ import PageNotFound from './pages/PageNotFound';
 
 
 const history = createBrowserHistory();
-history.listen(location => {
-  ReactGA.set({ page: location.pathname }); // Update the user's current page
+history.listen((location) => {
+  ReactGA.set({page: location.pathname}); // Update the user's current page
   ReactGA.pageview(location.pathname); // Record a pageview for the given page
 });
 
