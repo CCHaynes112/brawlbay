@@ -28,29 +28,29 @@ export default function RankedCard2v2 (props) {
   return (
     <>
       {
-                props.error
-                  ? (<Paper className={classes.no2v2}>
-                    <Typography variant='h6'>Oops, no 2v2 data...</Typography>
-                     </Paper>)
-                  : <Paper className={classes.paper}>
-                    {
-                        props.teams.map((team, key) => (
-                          <RankedCard1v1
-                            key={key}
-                            type='2v2'
-                            playerName={team.team_name}
-                            rankedImg={require(`./assets/img/Rankings/${team.tier.split(' ')[0]}.png`)}
-                            region={team.region}
-                            rank={team.tier}
-                            peakRating={team.peak_rating}
-                            currentRating={team.rating}
-                            games={team.games}
-                            wins={team.wins}
-                            losses={team.games - team.wins}
-                          />
-                        ))
-                      }
-                  </Paper>
+        props.error
+          ? (<Paper className={classes.no2v2}>
+            <Typography variant='h6'>Oops, no 2v2 data...</Typography>
+          </Paper>)
+          : <Paper className={classes.paper}>
+            {
+              props.teams.map((team, key) => (
+                <RankedCard1v1
+                  key={key}
+                  type='2v2'
+                  playerName={team.team_name}
+                  rankedImg={require(`./assets/img/Rankings/${team.tier.split(' ')[0]}.png`)}
+                  region={team.region}
+                  rank={team.tier}
+                  peakRating={team.peak_rating}
+                  currentRating={team.rating}
+                  games={team.games}
+                  wins={team.wins}
+                  losses={team.games - team.wins}
+                />
+              ))
+            }
+          </Paper>
       }
     </>
   )

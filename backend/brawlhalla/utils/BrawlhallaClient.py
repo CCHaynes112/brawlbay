@@ -1,14 +1,16 @@
-from secret_keys import brawl_key
-import requests
 import time
+
+import requests
+from secret_keys import brawl_key
+
 from ..models import (
-    BrawlhallaPlayer,
-    BrawlhallaPlayerLegend,
-    BrawlhallaLegend,
-    BrawlhallaPlayerRanked,
-    BrawlhallaPlayerRankedLegend,
     BrawlhallaClan,
     BrawlhallaClanPlayer,
+    BrawlhallaLegend,
+    BrawlhallaPlayer,
+    BrawlhallaPlayerLegend,
+    BrawlhallaPlayerRanked,
+    BrawlhallaPlayerRankedLegend,
     BrawlhallaPlayerRankedTeam,
 )
 

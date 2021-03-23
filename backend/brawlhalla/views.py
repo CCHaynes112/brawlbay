@@ -1,15 +1,17 @@
+import datetime
+import json
+import re
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import BadHeaderError, send_mail
+from django.http import HttpResponse, JsonResponse
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
+
 from .models import BrawlhallaPlayer
 from .schemas import BrawlhallaPlayerSchema
 from .utils.BrawlhallaClient import BrawlhallaClient, BrawlhallaDataConverter
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils import timezone
-import datetime
-import re
-import json
-from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import BadHeaderError, send_mail
-from django.http import HttpResponse, JsonResponse
 
 
 class BrawlhallaPlayerView(View):

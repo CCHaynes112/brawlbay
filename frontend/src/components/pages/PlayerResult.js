@@ -169,36 +169,36 @@ export default function PlayerResult (props) {
               {playerObj.clan
                 ? (<Grid item lg={12} className={classes.overviewItems}>
                   <ClanCard clanID={playerObj.clan.clan_id} clanName={playerObj.clan.clan_name} className={classes.clanCard} />
-                   </Grid>)
+                </Grid>)
                 : null}
             </Grid>
             <Grid item lg={9} container className={classes.rightContainer}>
               <Grid item sm={6} className={classes.rankedContainer}>
                 {
-                                playerObj.ranked
-                                  ? (<RankedCard1v1
-                                      type='1v1'
-                                      playerName={playerObj.ranked.name}
-                                      rankedImg={require(`../assets/img/Rankings/${playerObj.ranked.tier.split(' ')[0]}.png`)}
-                                      region={playerObj.ranked.region}
-                                      rank={playerObj.ranked.tier}
-                                      peakRating={playerObj.ranked.peak_rating}
-                                      currentRating={playerObj.ranked.rating}
-                                      games={playerObj.ranked.games}
-                                      wins={playerObj.ranked.wins}
-                                      losses={playerObj.ranked.games - playerObj.ranked.wins}
-                                     />)
-                                  : (<RankedCard1v1 error />)
-              }
+                  playerObj.ranked
+                    ? (<RankedCard1v1
+                        type='1v1'
+                        playerName={playerObj.ranked.name}
+                        rankedImg={require(`../assets/img/Rankings/${playerObj.ranked.tier.split(' ')[0]}.png`)}
+                        region={playerObj.ranked.region}
+                        rank={playerObj.ranked.tier}
+                        peakRating={playerObj.ranked.peak_rating}
+                        currentRating={playerObj.ranked.rating}
+                        games={playerObj.ranked.games}
+                        wins={playerObj.ranked.wins}
+                        losses={playerObj.ranked.games - playerObj.ranked.wins}
+                       />)
+                    : (<RankedCard1v1 error />)
+                }
               </Grid>
               <Grid item sm={6} className={classes.rankedContainer}>
                 {
-                                playerObj.ranked.ranked_teams
-                                  ? (
-                                    <RankedCard2v2 teams={playerObj.ranked.ranked_teams} />
-                                    )
-                                  : (<RankedCard2v2 error />)
-              }
+                  playerObj.ranked.ranked_teams
+                    ? (
+                      <RankedCard2v2 teams={playerObj.ranked.ranked_teams} />
+                      )
+                    : (<RankedCard2v2 error />)
+                }
               </Grid>
               <Grid item sm={12} className={classes.rankedContainer}>
                 <PlayerLegendAccordian legends={playerObj.legends} />
