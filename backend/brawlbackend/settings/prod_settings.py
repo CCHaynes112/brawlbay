@@ -1,13 +1,15 @@
-from .base_settings import *
+from .base_settings import *  # noqa
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 DEBUG = False
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": secret_keys.db_name,
-        "USER": secret_keys.db_username,
-        "PASSWORD": secret_keys.db_password,
+        "NAME": secret_keys.db_name,  # noqa
+        "USER": secret_keys.db_username,  # noqa
+        "PASSWORD": secret_keys.db_password,  # noqa
         "HOST": "172.17.0.1",
         "PORT": 5432,
     }

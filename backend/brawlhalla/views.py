@@ -1,16 +1,17 @@
+import datetime
+import json
+import re
+
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import BadHeaderError, send_mail
+from django.http import HttpResponse, JsonResponse
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View
+
 from .models import BrawlhallaPlayer
 from .schemas import BrawlhallaPlayerSchema
-from django.http import JsonResponse
 from .utils.BrawlhallaClient import BrawlhallaClient, BrawlhallaDataConverter
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils import timezone
-import datetime
-import re
-import json
-from django.views.decorators.csrf import csrf_exempt
-from django.core.mail import BadHeaderError, send_mail
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 
 class BrawlhallaPlayerView(View):
@@ -23,9 +24,7 @@ class BrawlhallaPlayerView(View):
                 minutes=REFRESH_WAIT_TIME
             ):
                 player = BrawlhallaDataConverter().update_all_player_data(brawlhalla_id)
-            return JsonResponse(
-                {"player": BrawlhallaPlayerSchema().dump(player)}
-            )
+            return JsonResponse({"player": BrawlhallaPlayerSchema().dump(player)})
         except ObjectDoesNotExist:
             created_player = BrawlhallaDataConverter().update_all_player_data(
                 brawlhalla_id
@@ -104,7 +103,10 @@ def send_email(request):
     if subject and message and email:
         try:
             send_mail(
-                subject, message, f"Brawlbay <{email}>", ["CCHaynes1122@gmail.com"]
+                subject,
+                message,
+                f"Brawlbay <{email}>",
+                ["CCHaynes1122@gmail.com"],
             )
         except BadHeaderError:
             return HttpResponse("Invalid header found.")

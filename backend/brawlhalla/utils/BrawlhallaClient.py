@@ -1,14 +1,16 @@
-from secret_keys import brawl_key
-import requests
 import time
+
+import requests
+from secret_keys import brawl_key
+
 from ..models import (
-    BrawlhallaPlayer,
-    BrawlhallaPlayerLegend,
-    BrawlhallaLegend,
-    BrawlhallaPlayerRanked,
-    BrawlhallaPlayerRankedLegend,
     BrawlhallaClan,
     BrawlhallaClanPlayer,
+    BrawlhallaLegend,
+    BrawlhallaPlayer,
+    BrawlhallaPlayerLegend,
+    BrawlhallaPlayerRanked,
+    BrawlhallaPlayerRankedLegend,
     BrawlhallaPlayerRankedTeam,
 )
 
@@ -140,7 +142,8 @@ class BrawlhallaDataConverter:
                 "clan_id": clan_json["clan_id"],
                 "clan_name": clan_json["clan_name"],
                 "clan_create_date": time.strftime(
-                    "%Y-%m-%d %H:%M:%S", time.localtime(clan_json["clan_create_date"])
+                    "%Y-%m-%d %H:%M:%S",
+                    time.localtime(clan_json["clan_create_date"]),
                 ),
                 "clan_xp": clan_json["clan_xp"],
             },
@@ -152,7 +155,8 @@ class BrawlhallaDataConverter:
                     "brawlhalla_id": member["brawlhalla_id"],
                     "rank": member["rank"],
                     "join_date": time.strftime(
-                        "%Y-%m-%d %H:%M:%S", time.localtime(member["join_date"])
+                        "%Y-%m-%d %H:%M:%S",
+                        time.localtime(member["join_date"]),
                     ),
                     "xp": member["xp"],
                 }
