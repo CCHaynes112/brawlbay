@@ -4,9 +4,9 @@ WORKDIR /app
 COPY ./backend/requirements.txt /app/backend/
 
 
-RUN pip install --upgrade --no-cache-dir pip==21.0
+RUN pip install --upgrade --no-cache-dir pip==21.0.1
 RUN pip install --no-cache-dir gunicorn==20.0.4
-RUN pip install -r --no-cache-dir backend/requirements.txt
+RUN pip install -r backend/requirements.txt --no-cache-dir
 
 COPY ./docker /app/docker
 COPY ./backend /app/backend
