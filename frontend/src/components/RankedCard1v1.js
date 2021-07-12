@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   imgContainer: {
     margin: 'auto',
-    paddingRight: 10
+    paddingRight: 10,
   },
   rankImg: {
     width: '100%'

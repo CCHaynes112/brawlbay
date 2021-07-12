@@ -45,7 +45,8 @@ const useStyles = makeStyles((theme) => ({
   },
   overviewItems: {
     padding: 10,
-    margin: 'auto'
+    margin: 'auto',
+    textAlign: "center",
   },
   rankedContainer: {
     margin: 'auto',
@@ -67,15 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
   refreshButton: {
     color: '#fff',
-    position: 'absolute',
-    [theme.breakpoints.down('lg')]: {
-      top: 260,
-      left: 560
-    },
-    [theme.breakpoints.down('sm')]: {
-      top: 70,
-      left: 100
-    }
+    width: 260,
   }
 }))
 
