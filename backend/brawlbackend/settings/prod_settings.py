@@ -1,6 +1,9 @@
 from .base_settings import *  # noqa
+import os
+import logging
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+from logdna import LogDNAHandler
 
 DEBUG = False
 
@@ -22,3 +25,27 @@ sentry_sdk.init(
     send_default_pii=True,
     environment="production",
 )
+
+LOGGING = {
+    "version": 1,
+    "handlers": {
+        "logdna": {
+            "level": logging.INFO,
+            "class": "logging.handlers.LogDNAHandler",
+            "key": secret_keys.log_dna_key,
+            "options": {
+                "app": "BrawlBay",
+                "env": "production",
+                "index_meta": False,
+                "verbose": True,
+                "hostname": "https://www.brawlbay.com",
+            },
+        }
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["logdna"],
+            "level": logging.WARNING
+        }
+    },
+}
