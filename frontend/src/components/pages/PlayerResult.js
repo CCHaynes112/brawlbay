@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid'
 import Container from '@material-ui/core/Container'
 import Divider from '@material-ui/core/Divider'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Button from '@material-ui/core/Button'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
 
@@ -146,8 +145,8 @@ export default function PlayerResult (props) {
                   games={playerObj.games}
                   wins={playerObj.wins}
                   losses={playerObj.games - playerObj.wins}
+                  shouldRefresh={playerObj.should_refresh}
                 />
-                <Button onClick={refreshUser} className={classes.refreshButton} variant='contained' color='secondary'>{refreshButtonContent}</Button>
               </Grid>
               <Grid item lg={12} className={classes.overviewItems}>
                 <Paper className={classes.winRateChart}>

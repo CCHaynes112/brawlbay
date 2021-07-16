@@ -8,6 +8,9 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import Sync from '@material-ui/icons/Sync'
+
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -49,6 +52,31 @@ const useStyles = makeStyles((theme) => ({
 
   rankValues: {
     textAlign: 'right'
+  },
+
+  refreshIcon: {
+    margin: 10,
+    height: 35,
+    width: 35,
+    boxShadow: "0 0 0 0 rgba(255, 125, 0, 1)",
+	  transform: "scale(1)",
+    animation: '$pulse 2s infinite'
+  },
+  "@keyframes pulse": {
+    "0%": {
+      transform: "scale(0.95)",
+      boxShadow: "0 0 0 0 rgba(255, 125, 0, 0.7)",
+    },
+  
+    "70%": {
+      transform: "scale(1)",
+      boxShadow: "0 0 0 10px rgba(255, 125, 0, 0)",
+    },
+  
+    "100%": {
+      transform: "scale(0.95)",
+      boxShadow: "0 0 0 0 rgba(255, 125, 0, 0)"
+    }
   }
 }))
 
@@ -63,6 +91,15 @@ export default function ProfileOverviewCard (props) {
           title: classes.title,
           subheader: classes.subheader
         }}
+        action={
+          props.shouldRefresh ? <IconButton
+          className={classes.refreshIcon}
+            color='inherit'
+            edge='start'
+          >
+            <Sync color="secondary" fontSize="large" />
+          </IconButton> : null
+        }
         title={props.playerName}
         subheader={'ID: ' + props.id}
       />
@@ -109,5 +146,6 @@ ProfileOverviewCard.propTypes = {
   rating: PropTypes.number,
   region: PropTypes.string,
   wins: PropTypes.number,
-  xp: PropTypes.number
+  xp: PropTypes.number,
+  shouldRefresh: PropTypes.bool,
 }

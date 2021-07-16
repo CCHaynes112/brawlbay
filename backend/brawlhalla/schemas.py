@@ -108,11 +108,12 @@ class BrawlhallaPlayerSchema(Schema):
     ko_spike = fields.Integer()
     ko_sidekick = fields.Integer()
     ko_snowball = fields.Integer()
-    created_at = fields.DateTime(dump_only=True)
-    updated_at = fields.DateTime(dump_only=True)
+    created_at = fields.DateTime("%Y-%m-%d-%H:%M:%S", dump_only=True)
+    updated_at = fields.DateTime("%Y-%m-%d-%H:%M:%S", dump_only=True)
     best_legend = fields.Method("get_best_legend")
     ranked = fields.Method("get_ranked")
     legends = fields.Method("get_legends")
+    should_refresh = fields.Boolean()
 
     def get_legends(self, player):
         return (

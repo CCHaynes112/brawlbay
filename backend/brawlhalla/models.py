@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+import datetime
 
 
 class BrawlhallaPlayer(models.Model):
@@ -20,6 +22,16 @@ class BrawlhallaPlayer(models.Model):
     ko_snowball = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def should_refresh(self):
+        three_days_ago = timezone.now() - datetime.timedelta(days=3)
+        print("~~~~~~~~~~~~~~~~~~~~~~~~")
+        print(self.updated_at)
+        print(three_days_ago)
+        print(self.updated_at < three_days_ago)
+        print("~~~~~~~~~~~~~~~~~~~~~~~~")
+        return self.updated_at < three_days_ago
 
     def __str__(self):
         return "{0}".format(self.name)
