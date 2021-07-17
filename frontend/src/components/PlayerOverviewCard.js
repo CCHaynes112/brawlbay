@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 7
   },
   title: {
-    fontSize: 34
+    wordBreak: "break-all",
   },
   subheader: {
     color: 'black'

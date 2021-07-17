@@ -2,7 +2,7 @@ from .base_settings import *  # noqa
 import logging
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
-from logdna import LogDNAHandler # noqa
+from logdna import LogDNAHandler  # noqa
 
 
 DEBUG = False
