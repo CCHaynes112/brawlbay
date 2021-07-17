@@ -1,9 +1,7 @@
 from .base_settings import *  # noqa
-import os
 import logging
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
-from logdna import LogDNAHandler
 
 DEBUG = False
 
@@ -32,7 +30,7 @@ LOGGING = {
         "logdna": {
             "level": logging.INFO,
             "class": "logging.handlers.LogDNAHandler",
-            "key": secret_keys.log_dna_key,
+            "key": secret_keys.log_dna_key, # noqa
             "options": {
                 "app": "BrawlBay",
                 "env": "production",
@@ -42,10 +40,5 @@ LOGGING = {
             },
         }
     },
-    "loggers": {
-        "django": {
-            "handlers": ["logdna"],
-            "level": logging.WARNING
-        }
-    },
+    "loggers": {"django": {"handlers": ["logdna"], "level": logging.WARNING}},
 }
