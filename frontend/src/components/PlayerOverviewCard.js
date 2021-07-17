@@ -77,6 +77,17 @@ const useStyles = makeStyles((theme) => ({
       transform: "scale(0.95)",
       boxShadow: "0 0 0 0 rgba(255, 125, 0, 0)"
     }
+  },
+  "@keyframes rotating": {
+    from: {
+      transform: "rotate(0deg)",
+    },
+    to: {
+      transform: "rotate(-360deg)"
+    },
+  },
+  rotating: {
+    animation: "$rotating 2s linear infinite",
   }
 }))
 
@@ -92,13 +103,14 @@ export default function ProfileOverviewCard (props) {
           subheader: classes.subheader
         }}
         action={
-          props.shouldRefresh ? <IconButton
-          className={classes.refreshIcon}
+          <IconButton
+            className={`${props.shouldRefresh ? classes.refreshIcon : null} ${props.playerRefreshed ? null : classes.rotating}`}
             color='inherit'
             edge='start'
+            onClick={() => props.handleRefresh()}
           >
-            <Sync color="secondary" fontSize="large" />
-          </IconButton> : null
+            <Sync color={props.shouldRefresh ? "secondary" : "primary"} fontSize="large" />
+          </IconButton>
         }
         title={props.playerName}
         subheader={'ID: ' + props.id}
@@ -147,5 +159,7 @@ ProfileOverviewCard.propTypes = {
   region: PropTypes.string,
   wins: PropTypes.number,
   xp: PropTypes.number,
+  playerRefreshed: PropTypes.bool,
   shouldRefresh: PropTypes.bool,
+  handleRefresh: PropTypes.func,
 }

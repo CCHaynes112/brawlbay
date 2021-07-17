@@ -65,19 +65,15 @@ const useStyles = makeStyles((theme) => ({
     margin: 'auto',
     paddingBottom: 20
   },
-  refreshButton: {
-    color: '#fff',
-    width: 260,
-  }
 }))
 
 export default function PlayerResult (props) {
   const classes = useStyles()
   const [playerObj, setPlayerObj] = useState({})
   const [isLoaded, setIsLoaded] = useState(false)
+  const [playerRefreshed, setPlayerRefreshed] = useState(true) 
   const [failed, setFailed] = useState(false)
   const [notificationOpen, setNotificationOpen] = useState(false)
-  const [refreshButtonContent, setRefreshButtonContent] = useState('Refresh Player')
 
   let page = (
     <div className={classes.textCenter}>
@@ -98,13 +94,13 @@ export default function PlayerResult (props) {
   }, [props.match.params.id])
 
   const refreshUser = () => {
-    setRefreshButtonContent('Refreshing player...')
+    setPlayerRefreshed(false);
     PlayerClient.get(props.match.params.id, { refresh: true })
       .then((res) => {
-        setRefreshButtonContent('Refresh Player')
         setNotificationOpen(true)
         setPlayerObj(res.data.player)
         setIsLoaded(true)
+        setPlayerRefreshed(true);
       })
       .catch((error) => {
         setFailed(true)
@@ -116,7 +112,6 @@ export default function PlayerResult (props) {
     if (reason === 'clickaway') {
       return
     }
-
     setNotificationOpen(false)
   }
 
@@ -145,7 +140,9 @@ export default function PlayerResult (props) {
                   games={playerObj.games}
                   wins={playerObj.wins}
                   losses={playerObj.games - playerObj.wins}
+                  playerRefreshed={playerRefreshed}
                   shouldRefresh={playerObj.should_refresh}
+                  handleRefresh={refreshUser}
                 />
               </Grid>
               <Grid item lg={12} className={classes.overviewItems}>
