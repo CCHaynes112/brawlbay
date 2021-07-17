@@ -13,6 +13,7 @@ Sentry.init({
     dsn: "https://6b54cef707c9494babd5563c9904df41@o552500.ingest.sentry.io/5869041",
     integrations: [new Integrations.BrowserTracing()],
     tracesSampleRate: 1.0,
+    environment: "production",
 });
 
 ReactDOM.render(<App />, document.getElementById('root'))
