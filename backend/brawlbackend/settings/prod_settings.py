@@ -30,7 +30,7 @@ LOGGING = {
         "logdna": {
             "level": logging.INFO,
             "class": "logging.handlers.LogDNAHandler",
-            "key": secret_keys.log_dna_key, # noqa
+            "key": secret_keys.log_dna_key,  # noqa
             "options": {
                 "app": "BrawlBay",
                 "env": "production",
