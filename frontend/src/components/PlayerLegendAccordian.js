@@ -46,7 +46,7 @@ export default function PlayerLegendAccordian (props) {
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <Grid container className={classes.subContainer}>
                 <Grid item sm={3} className={classes.heading}>
-                  <Avatar src={require(`./assets/img/legend_art/${legend.legend_id}.png`)} />
+                  <Avatar src={require(`./assets/img/thumbnails/${legend.legend_id}.png`)} />
                   <Typography variant='h6' className={classes.headingTitle}>{legend.legend_name}</Typography>
                 </Grid>
                 <Grid item sm={3}>
