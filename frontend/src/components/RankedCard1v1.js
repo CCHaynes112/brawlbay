@@ -108,7 +108,7 @@ RankedCard2v2.propTypes = {
   losses: PropTypes.number,
   peakRating: PropTypes.number,
   playerName: PropTypes.string,
-  rank: PropTypes.number,
+  rank: PropTypes.string,
   rankedImg: PropTypes.string,
   region: PropTypes.string,
   type: PropTypes.string,

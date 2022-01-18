@@ -58,7 +58,5 @@ export default function RankedCard2v2 (props) {
 
 RankedCard2v2.propTypes = {
   error: PropTypes.bool,
-  teams: PropTypes.shape({
-    map: PropTypes.func
-  })
+  teams: PropTypes.array
 }

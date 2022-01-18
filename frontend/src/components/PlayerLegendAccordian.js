@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import Accordion from '@material-ui/core/Accordion'
+import AccordionSummary from '@material-ui/core/AccordionSummary'
+import AccordionDetails from '@material-ui/core/AccordionDetails'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import Grid from '@material-ui/core/Grid'
@@ -42,8 +42,8 @@ export default function PlayerLegendAccordian (props) {
     <div className={classes.root}>
       {
         props.legends.map((legend, key) =>
-          <ExpansionPanel key={key}>
-            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Accordion key={key}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Grid container className={classes.subContainer}>
                 <Grid item sm={3} className={classes.heading}>
                   <Avatar src={require(`./assets/img/thumbnails/${legend.legend_id}.png`)} />
@@ -61,8 +61,8 @@ export default function PlayerLegendAccordian (props) {
                   <Typography variant='body1'>{'Games: ' + legend.games}</Typography>
                 </Grid>
               </Grid>
-            </ExpansionPanelSummary>
-            <ExpansionPanelDetails>
+            </AccordionSummary>
+            <AccordionDetails>
               <Grid container className={classes.chartContainer}>
                 <Grid item lg={2}>
                   <Typography variant='body1'>Match Time: {legend.match_time}</Typography>
@@ -103,8 +103,8 @@ export default function PlayerLegendAccordian (props) {
                   />
                 </Grid>
               </Grid>
-            </ExpansionPanelDetails>
-          </ExpansionPanel>
+            </AccordionDetails>
+          </Accordion>
         )
       }
 
@@ -113,7 +113,5 @@ export default function PlayerLegendAccordian (props) {
 }
 
 PlayerLegendAccordian.propTypes = {
-  legends: PropTypes.shape({
-    map: PropTypes.func
-  })
+  legends: PropTypes.array
 }

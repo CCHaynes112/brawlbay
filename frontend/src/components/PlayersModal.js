@@ -99,5 +99,5 @@ export default function PlayersModal (props) {
 PlayersModal.propTypes = {
   onClose: PropTypes.func,
   open: PropTypes.bool,
-  playerToSearch: PropTypes.shape
+  playerToSearch: PropTypes.string
 }
