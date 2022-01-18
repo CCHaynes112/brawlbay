@@ -228,7 +228,7 @@ class BrawlhallaClient:
     BRAWL_API_BASE = "https://api.brawlhalla.com/"
 
     def get_steam_player(self, steam_id):
-        """ Get id and name of player from steam id """
+        """Get id and name of player from steam id"""
         return requests.get(
             "{0}search?steamid={1}&api_key={2}".format(
                 self.BRAWL_API_BASE, steam_id, brawl_key
@@ -236,13 +236,13 @@ class BrawlhallaClient:
         ).json()
 
     def get_player_data(self, id):
-        """ Get general stats about a player, including stats about each legend """
+        """Get general stats about a player, including stats about each legend"""
         return requests.get(
             "{0}player/{1}/stats?api_key={2}".format(self.BRAWL_API_BASE, id, brawl_key)
         ).json()
 
     def get_ranked_player_data(self, id):
-        """ Get ranked stats about a player, including ranked stats about each legend """
+        """Get ranked stats about a player, including ranked stats about each legend"""
         return requests.get(
             "https://api.brawlhalla.com/player/{0}/ranked?api_key={1}".format(
                 id, brawl_key
@@ -250,7 +250,7 @@ class BrawlhallaClient:
         ).json()
 
     def get_leaderboard_data(self, bracket, region, page_number, player_name=""):
-        """ Get ranked leaderboard data """
+        """Get ranked leaderboard data"""
         return requests.get(
             "{0}/rankings/{1}/{2}/{3}?api_key={4}&name={5}".format(
                 self.BRAWL_API_BASE,
@@ -263,19 +263,19 @@ class BrawlhallaClient:
         ).json()
 
     def get_clan_data(self, clan_id):
-        """ Get general clan information, including each clan member """
+        """Get general clan information, including each clan member"""
         return requests.get(
             "{0}/clan/{1}?api_key={2}".format(self.BRAWL_API_BASE, clan_id, brawl_key)
         ).json()
 
     def get_all_legend_data(self):
-        """ Get overview data about all legends """
+        """Get overview data about all legends"""
         return requests.get(
             "{0}/legend/all?api_key={1}".format(self.BRAWL_API_BASE, brawl_key)
         ).json()
 
     def get_legend_data(self, legend_id):
-        """ Get detailed data about a legend """
+        """Get detailed data about a legend"""
         return requests.get(
             "{0}/legend/{1}?api_key={2}".format(
                 self.BRAWL_API_BASE, legend_id, brawl_key
