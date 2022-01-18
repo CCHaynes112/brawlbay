@@ -60,7 +60,7 @@ export default function PieChart (props) {
 }
 
 PieChart.propTypes = {
-  labels: PropTypes.string,
+  labels: PropTypes.array,
   title: PropTypes.string,
-  values: PropTypes.number
+  values: PropTypes.array
 }

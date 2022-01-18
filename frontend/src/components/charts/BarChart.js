@@ -67,7 +67,7 @@ export default function BarChart (props) {
 }
 
 BarChart.propTypes = {
-  labels: PropTypes.string,
+  labels: PropTypes.array,
   title: PropTypes.string,
-  values: PropTypes.number
+  values: PropTypes.array
 }
