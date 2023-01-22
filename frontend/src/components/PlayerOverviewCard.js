@@ -91,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function ProfileOverviewCard (props) {
+export default function PlayerOverviewCard (props) {
   const classes = useStyles()
 
   return (
@@ -148,7 +148,7 @@ export default function ProfileOverviewCard (props) {
   )
 }
 
-ProfileOverviewCard.propTypes = {
+PlayerOverviewCard.propTypes = {
   games: PropTypes.number,
   id: PropTypes.number,
   legendImg: PropTypes.string,

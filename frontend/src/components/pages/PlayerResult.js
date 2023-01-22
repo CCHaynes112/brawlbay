@@ -135,8 +135,8 @@ export default function PlayerResult (props) {
                   legendImg={require(`../assets/img/legend_art/${playerObj.best_legend}.png`)}
                   level={playerObj.level}
                   xp={playerObj.xp}
-                  rating={playerObj.ranked.rating}
-                  region={playerObj.ranked.region}
+                  rating={playerObj.ranked ? playerObj.ranked.rating : 0}
+                  region={playerObj.ranked ? playerObj.ranked.region : "N/A"}
                   games={playerObj.games}
                   wins={playerObj.wins}
                   losses={playerObj.games - playerObj.wins}
@@ -182,7 +182,7 @@ export default function PlayerResult (props) {
               </Grid>
               <Grid item sm={6} className={classes.rankedContainer}>
                 {
-                  playerObj.ranked.ranked_teams
+                  playerObj.ranked && playerObj.ranked.ranked_teams
                     ? (
                       <RankedCard2v2 teams={playerObj.ranked.ranked_teams} />
                       )
