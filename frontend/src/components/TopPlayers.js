@@ -44,16 +44,27 @@ export default function TopPlayers () {
       })
   }, [isLoaded, isLoaded])
 
+  const getLegendImage = (legend) => {
+    let legendImageSrc = '';
+    try {
+      legendImageSrc = require(`./assets/img/legend_art/${legend}.png`);
+    } catch (error) {
+      legendImageSrc = require(`./assets/img/placeholder.png`);
+    }
+    return legendImageSrc;
+  }
+
   if (!isLoaded) {
     playersElement = (<CircularProgress />)
   } else if (loadError) {
     playersElement = (<Typography>Error: {loadError}</Typography>)
   } else {
+    
     playersElement = playerArray.map((player, key) =>
       <Grid item key={key}>
         <PlayerCard
           playerID={player.brawlhalla_id}
-          legendImg={require(`./assets/img/legend_art/${player.best_legend}.png`)}
+          legendImg={getLegendImage(player.best_legend)}
           playerName={player.name}
           playerRating={player.rating}
           playerWins={player.wins}

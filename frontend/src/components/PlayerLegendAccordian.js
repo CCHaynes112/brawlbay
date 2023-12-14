@@ -38,6 +38,16 @@ const useStyles = makeStyles((theme) => ({
 export default function PlayerLegendAccordian (props) {
   const classes = useStyles()
 
+  const getLegendImage = (legend) => {
+    let legendImageSrc = '';
+    try {
+      legendImageSrc = require(`./assets/img/thumbnails/${legend.legend_id}.png`)
+    } catch (error) {
+      legendImageSrc = require(`./assets/img/placeholder.png`);
+    }
+    return legendImageSrc;
+  }
+
   return (
     <div className={classes.root}>
       {
@@ -46,7 +56,7 @@ export default function PlayerLegendAccordian (props) {
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Grid container className={classes.subContainer}>
                 <Grid item sm={3} className={classes.heading}>
-                  <Avatar src={require(`./assets/img/thumbnails/${legend.legend_id}.png`)} />
+                  <Avatar src={getLegendImage(legend)} />
                   <Typography variant='h6' className={classes.headingTitle}>{legend.legend_name}</Typography>
                 </Grid>
                 <Grid item sm={3}>
